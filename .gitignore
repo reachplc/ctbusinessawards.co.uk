@@ -42,6 +42,14 @@ html/app/mu-plugins/*
 #### White-list Plugins
 !html/app/plugins/index.php
 !html/app/mu-plugins/index.php
+!html/app/mu-plugins/ctba_categories.php
+!html/app/mu-plugins/ctba_entries.php
+!html/app/mu-plugins/ctba_judges.php
+!html/app/mu-plugins/ctba_partners.php
+!html/app/mu-plugins/ti-core-functions.php
+!html/app/mu-plugins/ti-roles-and-capabilities.php
+!html/app/mu-plugins/ti-widgets.php
+!html/app/mu-plugins/ti-wordpress-seo.php
 
 ### Themes
 .sass-cache
