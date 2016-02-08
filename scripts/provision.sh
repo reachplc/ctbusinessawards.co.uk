@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Setup the environment
+# Provision the vagrant environment
 
 # Copy site .conf file accross
 sudo cp /vagrant/config/environments/development.conf /etc/apache2/sites-available/ctbusinessawards.dev.conf
@@ -13,9 +13,10 @@ sudo ln -fs /etc/apache2/sites-available/ctbusinessawards.dev.conf /etc/apache2/
 sudo service apache2 restart
 # Setup database
 mysql -u root -proot -e "create database wordpress"
-#mysql -u root -proot wordpress < /vagrant/config/bootstrap.sql
+mysql -u root -proot wordpress < /vagrant/scripts/bootstrap.sql
 # Install Composer Dependencies
 php /usr/local/bin/composer.phar update --working-dir="/var/www/ctbusinessawards.dev" --no-interaction
 # Node
 npm -v
-#npm install --prefix /var/www/ctbusinessawards.dev
+npm install --prefix="/var/www/ctbusinessawards.dev/html/app/themes/ctba-2016/"
+#bower install --config.directory="/var/www/ctbusinessawards.dev/html/app/themes/ctba-2016/libs" -p
