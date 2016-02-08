@@ -4,7 +4,7 @@
 ## Project URLS
 
 - [GitHub Readme](https://github.com/trinitymirror/ctbusinessawards.co.uk/blob/master/README.md)
-- [Continuous Integration](https://codeship.com/projects/79191/)
+- [Continuous Integration](https://codeship.com/projects/132741/)
 - [Local](http://www.ctbusinessawards.dev/)
 - [QA](http://beta.ctbusinessawards.co.uk)
 - [Production](http://www.ctbusinessawards.co.uk)
