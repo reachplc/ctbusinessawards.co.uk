@@ -57,3 +57,4 @@ html/app/themes/*
 
 #### White-list Themes
 !html/app/themes/index.php
+!html/app/themes/ctba-2016/

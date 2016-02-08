@@ -1,0 +1,28 @@
+{
+  "name": "possession",
+  "repository": "https://github.com/michaelbragg/possession.git",
+  "license": "[MIT License](http://opensource.org/licenses/MIT/)",
+  "private": false,
+  "description": "A collection of a LESS files including a modified version of normalize and a collection of core objects to build great websites from.",
+  "version": "0.2.0",
+  "homepage": "https://github.com/michaelbragg/possession/",
+  "readme": "[ReadMe](/readme.md)",
+  "readmeFilename": "readme.md",
+  "author": {
+    "name": "Michael Bragg",
+    "email": "michael@michaelbragg.net",
+    "url": "http://michaelbragg.net"
+  },
+  "dependencies": {
+    "less": "1.4.x"
+    },
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-contrib-watch": "0.4.x",
+    "grunt-contrib-less": "0.6.x",
+    "grunt-contrib-csslint": "0.1.x",
+    "grunt-contrib-clean": "0.5.x",
+    "grunt-contrib-copy": "0.4.x",
+    "grunt-express": "1.0.0-beta2"
+  }
+}

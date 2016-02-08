@@ -1,0 +1,35 @@
+/*  --  base/_core.less  --*/
+
+@media print {
+
+  * {
+    background: transparent;  //  Stop background image from being printed
+    color: #000;  // Black prints faster: h5bp.com/s
+    box-shadow: none;
+    text-shadow: none;
+  }
+
+}
+
+@media print {
+
+  img {
+    page-break-inside: avoid;
+    max-width: 100%;
+  }
+
+}
+
+//
+//  Don't show links for images, or javascript/internal links
+//
+
+@media print {
+
+  .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+      content: "";
+  }
+
+}
