@@ -1,7 +1,7 @@
 <?php /* Template Name: Login */
 
-if (is_user_logged_in()) {
-  wp_redirect( home_url() );
+if ( is_user_logged_in() ) {
+  wp_redirect( home_url( '/') );
   exit;
 }
 
@@ -13,22 +13,23 @@ get_header(); ?>
 		  <div class="wrapper__sub">
 		    <article class="ss1-ss4 ms1-ms6 ls1-ls12 module login-form">
 
-		    <h1>Log in to your account</h1>
-				<p>Not ogt an account? <a href="<?php echo get_site_url(); ?>/register/">Click here to register</a>.</p>
+		    <?php the_title( '<h1 class="gamma heading--main page-title">', '</h1>'); ?>
 
-		    <form id="member-login" action="<?php echo get_site_url(); ?>/wp-login.php" method="POST" enctype="multipart/form-data">
+				<p><?php printf( __( 'Not got an account? <a href="%1$s">Click here to register</a>.', 'ctba-2016' ), home_url( $path = 'register/' ) ); ?></p>
+
+		    <form id="member-login" action="<?php echo home_url( 'wp-login.php' ); ?>" method="POST" enctype="multipart/form-data">
 	        <fieldset id="account-details">
-	          <label for="log">Username</label>
-	          <input type="text" name="log" id="log">
+	          <label for="log"><?php _e( 'Username', 'ctba-2016' ); ?></label>
+	          <input type="text" name="log" id="log" required>
 
-	          <label for="pwd">Password</label>
-	          <input type="password" name="pwd" id="log">
+	          <label for="pwd"><?php _e( 'Password', 'ctba-2016' ); ?></label>
+	          <input type="password" name="pwd" id="pwd" required>
 
-	          <label class="checkbox"><input type="checkbox" name="rememberme" value="forever">Remember Me</label>
+	          <label class="checkbox"><input type="checkbox" name="rememberme" value="forever"> <?php _e( 'Remember Me', 'ctba-2016' ); ?></label>
 
-	          <input type="hidden" name="redirect_to" value="<?php echo get_site_url(); ?>/nominate/">
+	          <input type="hidden" name="redirect_to" value="<?php echo home_url( 'nominate/' ); ?>">
 
-	          <button type="submit" name="submit" id="submit">Log In</button>
+	          <button class="btn btn__large btn--primary" type="submit" name="submit" id="submit"><?php _e( 'Login', 'ctba-2016' ); ?></button>
 	        </fieldset>
 		    </form>
 
