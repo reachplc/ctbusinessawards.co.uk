@@ -23,3 +23,6 @@ cd ~/clone/html/app/themes/ctba-2016/
 bower install
 grunt dev
 cd ~/clone
+
+# Setup Plugins
+composer install --no-interaction
