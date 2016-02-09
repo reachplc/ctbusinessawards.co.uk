@@ -946,6 +946,7 @@ a {
  */
 .image__responsive {
   max-width: 100%;
+  height: auto;
 }
 .image__responsive[src$='.svg'] {
   height: 100%;

@@ -13,6 +13,8 @@
 
 	</div><!-- #content -->
 
+<?php get_sidebar( 'partners' ); ?>
+
 <section class="footer__sub wrapper cf">
 
     <div class="wrapper__sub">
