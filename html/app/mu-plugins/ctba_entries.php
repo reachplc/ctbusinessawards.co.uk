@@ -134,7 +134,6 @@ class CTBA_Entries {
 			),
 			'supports'            	   => array(
 				'title',
-				'editor',
 				'revisions',
 			),
 			'labels'              	   => $labels,
