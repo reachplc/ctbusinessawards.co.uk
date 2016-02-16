@@ -31,7 +31,7 @@ html/media/*
 ### Languages
 html/app/languages/*
 
-#### White-list Plugins
+#### White-list Languages
 !html/app/languages/index.php
 
 ### Plugins
@@ -41,6 +41,7 @@ html/app/mu-plugins/*
 
 #### White-list Plugins
 !html/app/plugins/index.php
+!html/app/plugins/ctba_entries_2016.php
 !html/app/mu-plugins/index.php
 !html/app/mu-plugins/ctba_categories.php
 !html/app/mu-plugins/ctba_entries.php

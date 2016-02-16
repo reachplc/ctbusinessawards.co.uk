@@ -7,7 +7,8 @@
  * @since Twenty Sixteen 1.0
  */
 
-global $current_user;
+$current_user = wp_get_current_user();
+
 $custom_query = new WP_Query(
 	array(
 		'author'			=> $current_user->ID,
@@ -25,26 +26,46 @@ $custom_query = new WP_Query(
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<?php the_title( '<h1 class="gamma heading--main entry-title">', '</h1>' ); ?>
+	<p><?php printf( __( 'Welcome, %1$s (not you <a href="%2$s">logout</a>).', 'ctba-2016' ), $current_user->display_name, esc_url( home_url( $path = 'logout' ) ) ); ?></p>
+
 	</header><!-- .entry-header -->
 
 	<?php #ctba_post_thumbnail(); ?>
 
 	<div class="entry-content">
+
+	<table>
+	<thead>
+	<tr>
+	<th>Company</th>
+	<th>Categories</th>
+	<th>Status</th>
+	<th>Edit</th>
+	</tr>
+	</thead>
+	<tbody>
 		<?php
-		the_content();
 
 while($custom_query->have_posts()) : $custom_query->the_post(); ?>
+
 <?php $query = site_url( '/nominate/entry/' );
 $new_query = add_query_arg( array(
     'entry' => get_the_ID(),
 ), $query );?>
-	<div <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-		<h1><a href="<?php echo $new_query?>"><?php the_title(); ?></a></h1>
-		<?php the_content(); ?>
-	</div>
+
+	<tr id="post-<?php the_ID(); ?>">
+	<td><?php the_title( '<strong>', '</strong>'); ?></td>
+	<td></td>
+	<td></td>
+	<td><a href="<?php echo $new_query; ?>">Edit</a></td>
+	</tr>
 
 <?php endwhile; ?>
+</tbody>
+</table>
 <?php wp_reset_postdata(); // reset the query ?>
+
+		<?php the_content(); ?>
 
 	</div><!-- .entry-content -->
 

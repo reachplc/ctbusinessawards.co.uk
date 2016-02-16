@@ -5,6 +5,16 @@ if ( ! is_user_logged_in() ) {
   exit;
 }
 
+$entry = get_query_var( 'entry' );
+$object_id = ( get_query_var( 'entry' ) !== '' ? $entry : 0 );
+
+// Check to see if this is a new post or belongs to ctba entries
+// post type
+if( ( get_post_type( $object_id ) !== 'ctba-entries' ) && ( $object_id != 0 ) ){
+			remove_query_arg( 'entry' );
+			wp_redirect( home_url( $path = 'nominate/entry' ) );
+}
+
 get_header(); ?>
 
 <div id="primary" class="content-area">
