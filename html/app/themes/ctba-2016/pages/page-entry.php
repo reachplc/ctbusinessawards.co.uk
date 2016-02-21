@@ -15,6 +15,15 @@ if( ( get_post_type( $object_id ) !== 'ctba-entries' ) && ( $object_id != 0 ) ){
 			wp_redirect( home_url( $path = 'nominate/entry' ) );
 }
 
+// Check to see if the current entry was made by the current user
+global $current_user;
+	get_currentuserinfo();
+
+	if ( $current_user->ID != get_post_field('post_author', $object_id ) && ( $object_id != 0 ) )  {
+			remove_query_arg( 'entry' );
+			wp_redirect( home_url( $path = 'nominate/entry' ) );
+	}
+
 get_header(); ?>
 
 <div id="primary" class="content-area">
