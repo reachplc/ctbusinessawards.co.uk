@@ -135,6 +135,7 @@ class CTBA_Entries {
 			'supports'            	   => array(
 				'title',
 				'revisions',
+				'author',
 			),
 			'labels'              	   => $labels,
 		);
@@ -151,51 +152,15 @@ class CTBA_Entries {
 
 	}
 
-	public function entries_add_role_caps( $caps, $cap, $user_id, $args ) {
+	public function entries_add_role_caps( $caps, $cap, $user_id, $args ){
 
 		$subRole = get_role( 'subscriber' );
 		//print_r($subRole);
-		//$subRole->remove_cap( 'read_entries' );
-		//$subRole->remove_cap( 'create_entries' );
-		//$subRole->remove_cap( 'edit_entries' );
-		//$subRole->remove_cap( 'publish_entries' );
-
-		/* If editing, deleting, or reading a entry, get the post and post type object. 		if ( 'edit_entry' == $cap || 'delete_entry' == $cap || 'read_entry' == $cap ) {
-			$post = get_post( $args[0] );
-			$post_type = get_post_type_object( $post->post_type );
-
-			/* Set an empty array for the caps. */
-			//$caps = array();
-		//}*/
-
-
-		/* If editing a entry, assign the required capability.
-		if ( 'edit_entry' == $cap ) {
-			if ( $user_id == $post->post_author )
-				$caps[] = $post_type->cap->edit_posts;
-			else
-				$caps[] = $post_type->cap->edit_others_posts;
-		}*/
-
-		/* If deleting a entry, assign the required capability.
-		elseif ( 'delete_entry' == $cap ) {
-			if ( $user_id == $post->post_author )
-				$caps[] = $post_type->cap->delete_posts;
-			else
-				$caps[] = $post_type->cap->delete_others_posts;
-		}*/
-
-		/* If reading a private entry, assign the required capability.
-		elseif ( 'read_entry' == $cap ) {
-
-			if ( 'private' != $post->post_status )
-				$caps[] = 'read';
-			elseif ( $user_id == $post->post_author )
-				$caps[] = 'read';
-			else
-				$caps[] = $post_type->cap->read_private_posts;
-		}*/
-
+		/*$subRole->add_cap( 'read_entries' );
+		$subRole->add_cap( 'create_entries' );
+		$subRole->add_cap( 'edit_entries' );
+		$subRole->add_cap( 'publish_entries' );*/
+		//print_r($subRole);
 		/* Return the capabilities required by the user. */
 		return $caps;
 	}
