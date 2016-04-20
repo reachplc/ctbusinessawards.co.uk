@@ -33,6 +33,12 @@ define( 'WP_CONTENT_DIR', $webroot_dir . CONTENT_DIR );
 define( 'WP_CONTENT_URL', WP_HOME . CONTENT_DIR );
 
 /**
+ * Custom MU Plugins
+ */
+define( 'WPMU_PLUGIN_DIR', $webroot_dir . CONTENT_DIR .'/plugins-mu' );
+define( 'WPMU_PLUGIN_URL', WP_CONTENT_URL . '/plugins-mu' );
+
+/**
  * DB settings
  */
 define( 'DB_NAME', getenv('DB_NAME') );

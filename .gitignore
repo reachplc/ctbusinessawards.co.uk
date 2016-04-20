@@ -37,20 +37,20 @@ html/app/languages/*
 ### Plugins
 html/app/db.php
 html/app/plugins/*
-html/app/mu-plugins/*
+html/app/plugins-mu/*
 
 #### White-list Plugins
 !html/app/plugins/index.php
 !html/app/plugins/ctba_entries_2016.php
-!html/app/mu-plugins/index.php
-!html/app/mu-plugins/ctba_categories.php
-!html/app/mu-plugins/ctba_entries.php
-!html/app/mu-plugins/ctba_judges.php
-!html/app/mu-plugins/ctba_partners.php
-!html/app/mu-plugins/ti-core-functions.php
-!html/app/mu-plugins/ti-roles-and-capabilities.php
-!html/app/mu-plugins/ti-widgets.php
-!html/app/mu-plugins/ti-wordpress-seo.php
+!html/app/plugins-mu/index.php
+!html/app/plugins-mu/ctba_categories.php
+!html/app/plugins-mu/ctba_entries.php
+!html/app/plugins-mu/ctba_judges.php
+!html/app/plugins-mu/ctba_partners.php
+!html/app/plugins-mu/ti-core-functions.php
+!html/app/plugins-mu/ti-roles-and-capabilities.php
+!html/app/plugins-mu/ti-widgets.php
+!html/app/plugins-mu/ti-wordpress-seo.php
 
 ### Themes
 .sass-cache

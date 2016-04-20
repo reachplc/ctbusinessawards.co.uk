@@ -80,8 +80,8 @@ During the Alpha/Beta stages, due to constant changes, documentation will be mai
 │       └── production.php
 ├── html
 │   ├── app
-│   │   ├── mu-plugins
 │   │   ├── plugins
+│   │   ├── plugins-mu
 │   │   ├── themes
 │   │   └── languages
 │   ├── media
