@@ -11,9 +11,10 @@
 
 ## Dependencies
 
-- GIT
-- VirtualBox
-- Vagrant
+- [GIT](https://git-scm.com/downloads)
+- [VirtualBox](https://www.virtualbox.org/)
+- [Vagrant](https://www.vagrantup.com/downloads.html)
+ - [Hosts Updater](https://github.com/cogitatio/vagrant-hostsupdater)
 
 
 ## On-boarding – Getting Started
@@ -37,7 +38,7 @@ vagrant up
 
 ### View the development site
 
-Visit [http://www.ctbusinessawards.co.uk](http://www.ctbusinessawards.co.uk/) to view the development site.
+Visit [http://www.ctbusinessawards.dev](http://www.ctbusinessawards.dev/) to view the development site.
 
 ### Testing Your Changes
 
@@ -93,7 +94,7 @@ During the Alpha/Beta stages, due to constant changes, documentation will be mai
 
 - In order not to expose sensitive files in the webroot, we move what's required into a `html/` directory including the vendor'd `wp/` source, and the `wp-content` source.
 - `wp-content` has been named `app` to better reflect its contents. It contains application code and not just "static content". It also matches up with other frameworks such as Symfony and Rails.
-- `wp-config.php` remains in the `web/` because it's required by WordPress, but it only acts as a loader. The actual configuration files have been moved to `config/` for better separation.
+- `wp-config.php` remains in the `html/` because it's required by WordPress, but it only acts as a loader. The actual configuration files have been moved to `config/` for better separation.
 - `vendor/` is where the Composer managed dependencies are installed to.
 - `wp/` is where the WordPress core lives. It's also managed by Composer but can't be put under `vendor` due to WP limitations.
 - `uploads` has been named `media` and moved outside the `app` folder to better separate code and "static" content.
