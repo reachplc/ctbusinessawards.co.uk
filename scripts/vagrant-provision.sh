@@ -12,8 +12,8 @@ sudo ln -fs /etc/apache2/sites-available/ctbusinessawards.dev.conf /etc/apache2/
 # Restart Apache
 sudo service apache2 restart
 # Setup database
-mysql -u root -proot -e "create database wordpress"
-mysql -u root -proot wordpress < /vagrant/scripts/bootstrap.sql
+mysql -u root -proot -e "create database if not exists wordpress"
+#mysql -u root -proot wordpress < /vagrant/scripts/bootstrap.sql
 # Install Composer Dependencies
 php /usr/local/bin/composer.phar update --working-dir="/var/www/ctbusinessawards.dev" --no-interaction
 # Node

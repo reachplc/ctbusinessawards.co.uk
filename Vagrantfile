@@ -27,6 +27,6 @@ Vagrant.configure(2) do |config|
   config.vm.network "private_network", ip: "192.168.33.100"
   config.hostsupdater.aliases = ["www.ctbusinessawards.dev"]
 
-  config.vm.provision "shell", path: "scripts/provision.sh"
+  config.vm.provision "shell", path: "scripts/vagrant-provision.sh"
 
 end
