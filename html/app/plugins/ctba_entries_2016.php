@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: CTBA Entries 2016
+ * Plugin Name: CTBA Entries 2016 v3
  * Plugin URI:
  * Description: Entry form fields for 2016 event
  * Version:     1.0.0
@@ -10,20 +10,20 @@
  */
 
 function ctba_entries_set_title( $field_args, $field ){
-		$entry = get_query_var( 'entry' );
-		$value = get_the_title( $entry );
-		return $value;
-	}
+	$entry = get_query_var( 'entry' );
+	$value = get_the_title( $entry );
+	return $value;
+}
 
 function ctba_entries_set_default( $field_args, $field ) {
 		$entry = get_query_var( 'entry' );
-    $value = get_post_meta( (int) $entry, $field_args[id], true );
-    return $value;
+		$value = get_post_meta( (int) $entry, $field_args[ id ], true );
+		return $value;
 }
 
 function ctba_entries_set_entry_id( $field_args, $field ) {
 
-	if( isset( $entry ) ){
+	if ( isset( $entry ) ) {
 		$object_id = $entry;
 	} else {
 		$object_id = '0';
@@ -40,7 +40,7 @@ function ctba_entries_2016_form() {
 
 	$prefix = '_ctba_entries_2016_';
 
-	$cmb = new_cmb2_box( array(
+	$common = new_cmb2_box( array(
 		'id'           => $prefix . 'common',
 		'title'				 => __( 'Common Questions', 'ctba-entries-2016' ),
 		'object_types' => array( 'ctba-entries', ),
@@ -51,869 +51,825 @@ function ctba_entries_2016_form() {
 		'show_names'	 => 'true',
 	) );
 
-	$cmb->add_field( array(
+	$common->add_field( array(
 		'name'    => __( 'Company Name', 'ctba-entries-2016' ),
 		'id'      => 'submitted_post_title',
 		'type'    => 'text',
 		'default' => 'ctba_entries_set_title',
 		'attributes'  => array(
-      'placeholder' => __( 'Company Name', 'ctba-entries-2016' ),
-      'class' => '',
-    ),
+		'placeholder' => __( 'Company Name', 'ctba-entries-2016' ),
+		'class' => '',
+		),
 	) );
 
-	$cmb->add_field( array(
-		'name'    => __( 'Company Address', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_company_address',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-	        'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$cmb->add_field( array(
+	$common->add_field( array(
 		'name'    => __( 'Name of contact dealing with submission', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_contact_name',
+		'id'      => $prefix . 'contact_name',
 		'type'    => 'text',
 		'default' => 'ctba_entries_set_default',
 		'attributes'  => array(
-	        'placeholder' => __( 'Contact Name', 'ctba-entries-2016' ),
-        ),
+		'placeholder' => __( 'Contact Name', 'ctba-entries-2016' ),
+		),
 	) );
 
-	$cmb->add_field( array(
-		'name'    => __( 'Contact Telephone', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_contact_telephone',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-	        'placeholder' => __( 'Telephone Number', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$cmb->add_field( array(
+	$common->add_field( array(
 		'name'    => __( 'Contact Email', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_contact_email',
+		'id'      => $prefix . 'contact_email',
 		'type'    => 'text_email',
 		'default' => 'ctba_entries_set_default',
 		'attributes'  => array(
-	        'placeholder' => __( 'Contact Email', 'ctba-entries-2016' ),
-        ),
+		'placeholder' => __( 'Contact Email', 'ctba-entries-2016' ),
+		),
 	) );
 
-	$cmb->add_field( array(
-	    'name' => __( 'Date of formation', 'ctba-entries-2016' ),
-	    'id'   => 'ctba_entries_2016_date_of_formation',
-	    'default' => 'ctba_entries_set_default',
-	    'type' => 'text',
+	$common->add_field( array(
+		'name' => __( 'Date of formation', 'ctba-entries-2016' ),
+		'id'   => $prefix . 'date_of_formation',
+		'default' => 'ctba_entries_set_default',
+		'type' => 'text',
 	) );
 
-	$cmb->add_field( array(
-	    'name'             => __( 'Company Type', 'ctba-entries-2016' ),
-	    'desc'             => __( 'Is the business a sole trader, partnership or limited company', 'ctba-entries-2016' ),
-	    'id'               => 'ctba_entries_2016_business_type',
-	    'type'             => 'select',
-	    'show_option_none' => false,
-	    'default'          => 'default',
-	    'options'          => array(
-	    	'default'  => __( 'Select your business', '' ),
-	        'sole-trader' => __( 'Sole Trader', 'sole-trader' ),
-	        'partnership'   => __( 'Partnership', 'partnership' ),
-	        'limited'     => __( 'Limited Company', 'limited' ),
-	    ),
+	$common->add_field( array(
+		'name'             => __( 'Business Type', 'ctba-entries-2016' ),
+		'desc'             => __( 'What type of business are you?', 'ctba-entries-2016' ),
+		'id'               => $prefix . 'business_type',
+		'type'             => 'select',
+		'show_option_none' => false,
+		'default'          => 'default',
+		'options'          =>
+		array(
+			'default'  => __( 'Select your business', '' ),
+			'sole-trader-partnership' => __( 'Sole Trader/Partnership', 'ctba-entries-2016' ),
+			'limited'     => __( 'Limited Company', 'ctba-entries-2016' ),
+			'charity'     => __( 'Exempt Charity', 'ctba-entries-2016' ),
+			'limited-guarantee'     => __( 'Company Limited by Guarantee', 'ctba-entries-2016' ),
+			'public-sector'     => __( 'Public Sector Organisation', 'ctba-entries-2016' ),
+			'association'     => __( 'Unincorporated Association', 'ctba-entries-2016' ),
+			'community-interest'     => __( 'Community Interest Company Limited', 'ctba-entries-2016' ),
+		),
 	) );
 
-	$cmb->add_field( array(
+	$common->add_field( array(
 		'name'    => __( 'Parent Company Details (if applicable)', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_parent_company',
+		'id'      => $prefix .'parent_company',
 		'type'    => 'textarea',
 		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
+		'attributes'  => array(),
 	) );
 
-		$cmb->add_field( array(
+	$common->add_field( array(
+		'name'    => __( 'No. of employees', 'ctba-entries-2016' ),
+		'id'      => $prefix .'number_employees',
+		'type'    => 'number',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$common->add_field( array(
+		'name'    => __( 'Turnover for last financial year', 'ctba-entries-2016' ),
+		'id'      => $prefix .'turnover_last_year',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$common->add_field( array(
 		'name'    => __( 'Description of products/services', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_description_products_services',
+		'id'      => $prefix . 'description_products_services',
 		'type'    => 'textarea',
 		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'Other relevant background information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_background_releveant_info',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-	// Financial Information
-
-	// Turnover
-	$cmb->add_field( array(
-		'name'    => __( 'Turnover This Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_turnover_this_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'Turnover Last Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_turnover_last_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'Turnover Previous Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_turnover_previous_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'Turnover Next Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_turnover_next_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	// Net Profit
-	$cmb->add_field( array(
-		'name'    => __( 'Net Profit This Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_net_profit_this_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'Net Profit Last Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_net_profit_last_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'Net Profit Previous Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_net_profit_previous_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'Net Profit Next Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_net_profit_next_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	// No of Employees
-	$cmb->add_field( array(
-		'name'    => __( 'No. of Employees This Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_employees_this_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'No. of Employees Last Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_employees_last_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'No. of Employees Previous Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_employees_previous_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
-	) );
-
-	$cmb->add_field( array(
-		'name'    => __( 'No. of Employees Next Year', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_employees_next_year',
-		'type'    => 'text',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-        ),
+		'attributes'  => array(),
 	) );
 
 	// Other Categories
 
-	$cmb->add_field( array(
+	$common->add_field( array(
 		'name'    => __( 'Choose the categories you would like to enter', 'ctba-entries-2016' ),
 		'id'      => 'ctba_entries_2016_categories',
 		'type'    => 'multicheck',
-		'options' => array(
-		    'business' => 'Business Start Up & Entrepreneur',
-		    'export' => 'Export',
-		    'finance' => 'Finance',
-		    'legal' => 'Legal',
-		    'manufacturing' => 'Manufacturing',
-		    'professional' => 'Outstanding Professional',
-		    'people' => 'People Development',
-		    'property' => 'Property including Regeneration',
-		    'sme' => 'Small & Medium Sized Enterprise',
-		    'technology' => 'Technology & Digital',
+		'options' =>
+		array(
+			'not-for-profit' => __( 'Not-for-profit Organisation', 'ctba-entries-2016' ),
+			'community' => __( 'Contribution to the Community', 'ctba-entries-2016' ),
+			'international-trade' => __( 'International Trade', 'ctba-entries-2016' ),
+			'creative-industries' => __( 'Creative Industries Business of the Year', 'ctba-entries-2016' ),
+			'retail' => __( 'Retail Business of the Year', 'ctba-entries-2016' ),
+			'science-technology' => __( 'Excellence in Science and Technology', 'ctba-entries-2016' ),
+			'manufacturing' => __( 'Excellence in Manufacturing', 'ctba-entries-2016' ),
+			'sales-marketing' => __( 'Sales and Marketing', 'ctba-entries-2016' ),
+			'legal' => __( 'Legal Services', 'ctba-entries-2016' ),
+			'financial' => __( 'Financial Services', 'ctba-entries-2016' ),
+			'entrepreneur' => __( 'Business Entrepreneur of the Year', 'ctba-entries-2016' ),
+			'new-business' => __( 'New Business of the Year', 'ctba-entries-2016' ),
+			'small-business' => __( 'Small Business of the Year', 'ctba-entries-2016' ),
+			'company-of-the-year' => __( 'Company of the Year', 'ctba-entries-2016' ),
 		)
 	) );
 
 	/**
-	 * Business Start Up & Entrepreneur
+	 * Not For Profit
 	 */
 
-	$business_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-business',
-		'title'				 => __( 'Business Start Up & Entrepreneur', 'ctba-entries-2016' ),
+	$notforprofit = new_cmb2_box( array(
+		'id'           => $prefix . 'notforprofit',
+		'title'				 => __( 'Not for Profit Organisation Award', 'ctba-entries-2016' ),
 		'object_types' => array( 'ctba-entries', ),
 		//'hookup'       => false,
 		//'save_fields'  => false,
 		'context'			 => 'normal',
-		'priority'		 => 'high',
+		'priority'		 => 'default',
 		'show_names'	 => 'true',
 	) );
 
-	$business_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_business_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$notforprofit->add_field( array(
+		'name'						=> __( 'What are your main aims and objectives', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'notforprofit_aims',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$business_category->add_field( array(
-		'name'    => __( 'Company Success?', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_business_why',
-		'description' => __( 'Why do you deserve this award?', 'ctba-entries-2016' ),
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$notforprofit->add_field( array(
+		'name'						=> __( 'Explain the work you do to achive your overall aims and objectives', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'notforprofit_explain',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$business_category->add_field( array(
-		'name'    => __( 'The Future', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_business_future',
-		'description' => 'Please state your company\'s ambitions for the future including new markets you hope to exploit.',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$notforprofit->add_field( array(
+		'name'						=> __( 'What activities do you undertake to secure funding for your organisation (if applicable)', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'notforprofit_activities',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$business_category->add_field( array(
-		'name'    => __( 'Any Other Information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_business_other',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$notforprofit->add_field( array(
+		'name'						=> __( 'Demonstrate the support from partners, customers and employees for your overall aims and objectives', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'notforprofit_demonstrate',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$notforprofit->add_field( array(
+		'name'						=> __( 'Give details of significant partnerships and what the key objectives are', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'notforprofit_details',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$notforprofit->add_field( array(
+		'name'						=> __( 'Describe the key measures of high performance of the organisation', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'notforprofit_performance',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$notforprofit->add_field( array(
+		'name'						=> __( 'Describe the legacy of your organisation as a result of this year&rsquo;s activity', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'notforprofit_legacy',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$notforprofit->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'notforprofit_details',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
 	/**
-	 * Export
+	 * Community
 	 */
-	$export_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-export',
-		'title'				 => __( 'Export', 'ctba-entries-2016' ),
+
+	$community = new_cmb2_box( array(
+		'id'           => $prefix . 'community',
+		'title'				 => __( 'Contribution to the Community Award', 'ctba-entries-2016' ),
 		'object_types' => array( 'ctba-entries', ),
 		//'hookup'       => false,
 		//'save_fields'  => false,
 		'context'			 => 'normal',
-		'priority'		 => 'high',
+		'priority'		 => 'default',
 		'show_names'	 => 'true',
 	) );
 
-	$export_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_export_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$community->add_field( array(
+		'name'						=> __( 'Please provide details of your organisation&rsquo;s corporate responsibility polict and outline your entitlemnet to be termed &lsquo;a good corporate citizen&rsquo;', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'community_good',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$export_category->add_field( array(
-		'name'    => __( 'Company Success' ),
-		'id'      => 'ctba_entries_2016_export_why',
-		'description' => __( 'Why do you deserve this award?', 'ctba-entries-2016' ),
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$community->add_field( array(
+		'name'						=> __( 'How is your organnisation&rsquo;s policy implemented and how is this embedded within your organisation', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'community_how',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$export_category->add_field( array(
-		'name'    => __( 'The Future', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_export_future',
-		'description' => 'Please state your company\'s ambitions for the future including new markets you hope to exploit.',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$community->add_field( array(
+		'name'						=> __( 'Explain any successes your company has had through product innovation', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'community_explain',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$export_category->add_field( array(
-		'name'    => __( 'Any Other Information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_export_other',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$community->add_field( array(
+		'name'						=> __( 'What engagement do you and your employees have with the communities in which your organisation operates', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'community_engagement',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$community->add_field( array(
+		'name'						=> __( 'Outline any successes your company has had with sales growth', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'community_successes',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$community->add_field( array(
+		'name'						=> __( 'What engagement do you and your employees have with the communities in which your organisation operates', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'community_engagement',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$community->add_field( array(
+		'name'						=> __( 'Please provide details of any charitable/community activities or exceptional projects that your organisation has been involved in over the last 12 months', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'community_details',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
 	/**
-	 * Finance
+	 * International Trade
 	 */
-	$finance_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-finance',
-		'title'				 => __( 'Finance', 'ctba-entries-2016' ),
+
+	$trade = new_cmb2_box( array(
+		'id'           => $prefix . 'trade',
+		'title'				 => __( 'International Trade Award', 'ctba-entries-2016' ),
 		'object_types' => array( 'ctba-entries', ),
 		//'hookup'       => false,
 		//'save_fields'  => false,
 		'context'			 => 'normal',
-		'priority'		 => 'high',
+		'priority'		 => 'default',
 		'show_names'	 => 'true',
 	) );
 
-	$finance_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_finance_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$trade->add_field( array(
+		'name'						=> __( 'Describe the products/services that have been successful internationally', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'trade_products',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$finance_category->add_field( array(
-		'name'    => __( 'Company Success' ),
-		'id'      => 'ctba_entries_2016_finance_why',
-		'description' => __( 'Why do you deserve this award?', 'ctba-entries-2016' ),
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$trade->add_field( array(
+		'name'						=> __( 'What proportions of your total sales are international', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'trade_proportions',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$finance_category->add_field( array(
-		'name'    => __( 'The Future', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_finance_future',
-		'description' => 'Please state your company\'s ambitions for the future including new markets you hope to exploit.',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$trade->add_field( array(
+		'name'						=> __( 'What strategy has been used to drive your international activity', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'trade_strategy',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$finance_category->add_field( array(
-		'name'    => __( 'Any Other Information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_finance_other',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$trade->add_field( array(
+		'name'						=> __( 'Describe the involvement by local companies or authorities in your international success', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'trade_local',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$trade->add_field( array(
+		'name'						=> __( 'Describe any new markets (i.e. countries) that you have traded in/to', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'trade_markets',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$trade->add_field( array(
+		'name'						=> __( 'What is your strategy for the future in terms of international activity', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'trade_future_strategy',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$trade->add_field( array(
+		'name'						=> __( 'Demonstrate the growth of your international activity', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'trade_growth',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$trade->add_field( array(
+		'name'						=> __( 'What is the one key thing that has underpinned your international success and underpins this award nomination?', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'trade_nomination',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$trade->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'trade_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
 	/**
-	 * Legal
+	 * Creative
 	 */
-	$legal_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-legal',
-		'title'				 => __( 'Legal', 'ctba-entries-2016' ),
+
+	$creative = new_cmb2_box( array(
+		'id'           => $prefix . 'creative',
+		'title'				 => __( 'Creative Industries Business of the Year', 'ctba-entries-2016' ),
 		'object_types' => array( 'ctba-entries', ),
 		//'hookup'       => false,
 		//'save_fields'  => false,
 		'context'			 => 'normal',
-		'priority'		 => 'high',
+		'priority'		 => 'default',
 		'show_names'	 => 'true',
 	) );
 
-	$legal_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_legal_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
+	$creative->add_field( array(
+		'name'						=> __( 'How do you stimulate original ideas in your business', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'creative_stimulate',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$creative->add_field( array(
+		'name'						=> __( 'Give examples of your personal/business creativity', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'creative_examples',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$creative->add_field( array(
+		'name'						=> __( 'How have you applied creativity to producrs, services or business challenges', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'creative_applied',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$creative->add_field( array(
+		'name'						=> __( 'What contribution to creative industries have you made regionally to your industry/sector', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'creative_contribution',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$creative->add_field( array(
+		'name'						=> __( 'Give an example of work done for a client that you feel establishes your business as a creative industry leader', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'creative_work',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$creative->add_field( array(
+		'name'						=> __( 'How will your breative business continue to  adapt to the changing economic environment to ensure its future success', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'creative_success',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$creative->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'creative_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	/**
+	 * Retail
+	 */
+
+	$retail = new_cmb2_box( array(
+		'id'           => $prefix . 'retail',
+		'title'				 => __( 'Retail Business of the Year Award', 'ctba-entries-2016' ),
+		'object_types' => array( 'ctba-entries', ),
+		//'hookup'       => false,
+		//'save_fields'  => false,
+		'context'			 => 'normal',
+		'priority'		 => 'default',
+		'show_names'	 => 'true',
 	) );
 
-	$legal_category->add_field( array(
-		'name'    => __( 'Company Success', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_legal_why',
-		'description' => __( 'Why do you deserve this award?', 'ctba-entries-2016' ),
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
+	$retail->add_field( array(
+		'name'						=> __( 'What strategy has been used to drive your company forward', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'retail_strategy',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$retail->add_field( array(
+		'name'						=> __( 'What investment has been made in any equipment and infrastructure', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'retail_investment',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$retail->add_field( array(
+		'name'						=> __( 'Describe how you ensure high quality customer service in your business', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'retail_customer',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$retail->add_field( array(
+		'name'						=> __( 'Detail any ongoing commitment to staff development', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'retail_staff',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$retail->add_field( array(
+		'name'						=> __( 'Detail any involvement your business has in online retailing', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'retail_online',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$retail->add_field( array(
+		'name'						=> __( 'Outline any successes your company has had through innovation in products or services', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'retail_products',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$retail->add_field( array(
+		'name'						=> __( 'Detail any sales, marketing and promotional activity that has had a significant beneficial impoact on your business', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'retail_marketing',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$retail->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'retail_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	/**
+	 * Science & Technology
+	 */
+
+	$technology = new_cmb2_box( array(
+		'id'           => $prefix . 'technology',
+		'title'				 => __( 'Excellence in Science &amp; Technology Award', 'ctba-entries-2016' ),
+		'object_types' => array( 'ctba-entries', ),
+		//'hookup'       => false,
+		//'save_fields'  => false,
+		'context'			 => 'normal',
+		'priority'		 => 'default',
+		'show_names'	 => 'true',
 	) );
 
-	$legal_category->add_field( array(
-		'name'    => __( 'The Future', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_legal_future',
-		'description' => 'Please state your company\'s ambitions for the future including new markets you hope to exploit.',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$technology->add_field( array(
+		'name'						=> __( 'Describe how investment in science and technology has enhanced your company', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'technology_investment',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$legal_category->add_field( array(
-		'name'    => __( 'Any Other Information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_legal_other',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$technology->add_field( array(
+		'name'						=> __( 'What strategy has been used to drive your company forward', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'technology_strategy',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+	$technology->add_field( array(
+		'name'						=> __( 'What investment has been made into any equipment and infrastructure', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'technology_infrastructure',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$technology->add_field( array(
+		'name'						=> __( 'Outline any successes your company has had through product innovation', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'technology_success',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$technology->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'technology_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
 	/**
 	 * Manufacturing
 	 */
-	$manufacturing_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-manufacturing',
-		'title'				 => __( 'Manufacturing', 'ctba-entries-2016' ),
+
+	$manufacturing = new_cmb2_box( array(
+		'id'           => $prefix . 'manufacturing',
+		'title'				 => __( 'Excellence in Manufacturing Award', 'ctba-entries-2016' ),
 		'object_types' => array( 'ctba-entries', ),
 		//'hookup'       => false,
 		//'save_fields'  => false,
 		'context'			 => 'normal',
-		'priority'		 => 'high',
+		'priority'		 => 'default',
 		'show_names'	 => 'true',
 	) );
 
-	$manufacturing_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_manufacturing_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$manufacturing->add_field( array(
+		'name'						=> __( 'Describe the manufacturing process and products manufactured', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_process',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$manufacturing_category->add_field( array(
-		'name'    => __( 'Company Success', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_manufacturing_why',
-		'description' => __( 'Why do you deserve this award?', 'ctba-entries-2016' ),
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$manufacturing->add_field( array(
+		'name'						=> __( 'Describe the specific technical aspects of your manufacturing process; include any relevant standards or approvals', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_technical',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$manufacturing_category->add_field( array(
-		'name'    => __( 'The Future', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_manufacturing_future',
-		'description' => 'Please state your company\'s ambitions for the future including new markets you hope to exploit.',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$manufacturing->add_field( array(
+		'name'						=> __( 'Explain your trading performance and growth patterns', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_trading',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$manufacturing_category->add_field( array(
-		'name'    => __( 'Any Other Information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_manufacturing_other',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$manufacturing->add_field( array(
+		'name'						=> __( 'Give examples of manufacturing innovation or creativity', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_innovation',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$manufacturing->add_field( array(
+		'name'						=> __( 'Give examples of investment in people and/or capital', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_investment',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$manufacturing->add_field( array(
+		'name'						=> __( 'What new processes or products have been introduced', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_new',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$manufacturing->add_field( array(
+		'name'						=> __( 'Briefly describe the market served both in the UK and abroad if applicable', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_market',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$manufacturing->add_field( array(
+		'name'						=> __( 'Explain briefly your environmental practices', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_environmental',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$manufacturing->add_field( array(
+		'name'						=> __( 'Are there any particular pressures or challenges that you have had to overcome from a manufactturing perspective? If so, how have you done this', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_challenges',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$manufacturing->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'manufacturing_challenges',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
 	/**
-	 * Small & medium sized enterprise
+	 * Sales & Marketing
 	 */
-	$sme_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-sme',
-		'title'				 => __( 'Small & Medium Sized Enterprise', 'ctba-entries-2016' ),
+
+	$marketing = new_cmb2_box( array(
+		'id'           => $prefix . 'marketing',
+		'title'				 => __( 'Sales &amp; Marketing Award', 'ctba-entries-2016' ),
 		'object_types' => array( 'ctba-entries', ),
 		//'hookup'       => false,
 		//'save_fields'  => false,
 		'context'			 => 'normal',
-		'priority'		 => 'high',
+		'priority'		 => 'default',
 		'show_names'	 => 'true',
 	) );
 
-	$sme_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_sme_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$marketing->add_field( array(
+		'name'						=> __( 'What is the geographical scope of your customer/client base', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'marketing_geographical',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$sme_category->add_field( array(
-		'name'    => __( 'Company Success', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_sme_why',
-		'description' => __( 'Why do you deserve this award?', 'ctba-entries-2016' ),
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$marketing->add_field( array(
+		'name'						=> __( 'What competitors do you have in the market(s) and how have you targeted your sales and marketing strategy effectively against them', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'marketing_competitors',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$sme_category->add_field( array(
-		'name'    => __( 'The Future', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_sme_future',
-		'description' => 'Please state your company\'s ambitions for the future including new markets you hope to exploit.',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$marketing->add_field( array(
+		'name'						=> __( 'How do you measure the effectiveness of your sales and marketing activities.', 'ctba-entries-2016' ),
+		'description'			=> __( 'Explain how your customers/clients have reacted to your marketing initiatives', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'marketing_measure',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$sme_category->add_field( array(
-		'name'    => __( 'Any Other Information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_sme_other',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$marketing->add_field( array(
+		'name'						=> __( 'Explain how your sales and marketing initiatives have benefited your business', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'marketing_benefits',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	/**
-	 * Outstanding Professional
-	 */
-	$professional_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-professional',
-		'title'				 => __( 'Outstanding Professional', 'ctba-entries-2016' ),
-		'object_types' => array( 'ctba-entries', ),
-		//'hookup'       => false,
-		//'save_fields'  => false,
-		'context'			 => 'normal',
-		'priority'		 => 'high',
-		'show_names'	 => 'true',
-	) );
+	$marketing->add_field( array(
+		'name'						=> __( 'To what extent have you opened up new markets, developed existing markets or brought further growth through effective sales and marketing', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'marketing_effective',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$professional_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_professional_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$marketing->add_field( array(
+		'name'						=> __( 'Explain how e-commerce is incorporated into your sales and marketing strategy', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'marketing_online',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
-	$professional_category->add_field( array(
-		'name'    => __( 'Entrepreneurial Innovation and Flair', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_professional_why',
-		'description' => __( 'Please give examples of how and when you/your nominee has demonstrated entrepreneurial innovation and flair, using financial information to support where appropriate.', 'ctba-entries-2016' ),
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$professional_category->add_field( array(
-		'name'    => __( 'Charities and Community Bodies', 'ctba-entries-2016' ),
-		'description' => __( 'Give examples of how you/your nominee supports charities and community bodies in the West Midlands region.', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_professional_supports',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$professional_category->add_field( array(
-		'name'    => __( 'Demonstrate how you/your nominee helps to promote the region', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_professional_region',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$professional_category->add_field( array(
-		'name'    => __( 'Please detail accreditation, accolades and recognition received', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_professional_accreditation',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	/**
-	 * People Development
-	 */
-	$people_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-people',
-		'title'				 => __( 'People Development', 'ctba-entries-2016' ),
-		'object_types' => array( 'ctba-entries', ),
-		//'hookup'       => false,
-		//'save_fields'  => false,
-		'context'			 => 'normal',
-		'priority'		 => 'high',
-		'show_names'	 => 'true',
-	) );
-
-	$people_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_people_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$people_category->add_field( array(
-		'name'    => __( 'Internal Training and Development: Own Staff', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_people_own',
-		'type'    => 'textarea',
-		'description' => 'Describe the improvements in staff performance and motivation. How many training days per quarter do your staff attend and is it mandatory attendance. Does your organisation provide its staff with recognised qualifications and if so at what level?',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$people_category->add_field( array(
-		'name'    => __( 'External Training and Development: Training & Development company', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_people_external',
-		'type'    => 'textarea',
-		'description' => 'Which companies do you deliver training and development for? Does your company provide training and development to any hard to reach sectors of the community? How do you actively source your clients',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$people_category->add_field( array(
-		'name'    => __( 'Technical Details', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_people_technical',
-		'type'    => 'textarea',
-		'description' => 'Please describe the types of training and development delivered in more details.',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$people_category->add_field( array(
-		'name'    => __( 'The Future', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_people_future',
-		'description' => 'Please state your company\'s ambitions for the future including new markets you hope to exploit.',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$people_category->add_field( array(
-		'name'    => __( 'Any Other Information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_people_other',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	/**
-	 * Property including Regeneration
-	 */
-	$property_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-property',
-		'title'				 => __( 'Property including Regeneration', 'ctba-entries-2016' ),
-		'object_types' => array( 'ctba-entries', ),
-		//'hookup'       => false,
-		//'save_fields'  => false,
-		'context'			 => 'normal',
-		'priority'		 => 'high',
-		'show_names'	 => 'true',
-	) );
-
-	$property_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_property_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$property_category->add_field( array(
-		'name'    => __( 'Company Success', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_property_why',
-		'description' => __( 'Why do you deserve this award?', 'ctba-entries-2016' ),
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$property_category->add_field( array(
-		'name'    => __( 'The Future', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_property_future',
-		'description' => 'Please state your company\'s ambitions for the future including new markets you hope to exploit.',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$property_category->add_field( array(
-		'name'    => __( 'Any Other Information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_property_other',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	/**
-	 * Technology & Digital
-	 */
-	$technology_category = new_cmb2_box( array(
-		'id'           => 'ctba-2016-categories-technology',
-		'title'				 => __( 'Technology & Digital', 'ctba-entries-2016' ),
-		'object_types' => array( 'ctba-entries', ),
-		//'hookup'       => false,
-		//'save_fields'  => false,
-		'context'			 => 'normal',
-		'priority'		 => 'high',
-		'show_names'	 => 'true',
-	) );
-
-	$technology_category->add_field( array(
-		'name'    => __( 'Briefly describe your product or service', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_technology_describe',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$technology_category->add_field( array(
-		'name'    => __( 'Company Success', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_technology_why',
-		'description' => __( 'Why do you deserve this award?', 'ctba-entries-2016' ),
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$technology_category->add_field( array(
-		'name'    => __( 'The Future', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_technology_future',
-		'description' => 'Please state your company\'s ambitions for the future including new markets you hope to exploit.',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
-
-	$technology_category->add_field( array(
-		'name'    => __( 'Any Other Information', 'ctba-entries-2016' ),
-		'id'      => 'ctba_entries_2016_technology_other',
-		'type'    => 'textarea',
-		'default' => 'ctba_entries_set_default',
-		'attributes'  => array(
-			//'placeholder' => __( 'Address', 'ctba-entries-2016' ),
-        ),
-	) );
+	$marketing->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'marketing_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
 
 	/**
 	 * Additional
-   */
+	 */
 
 	$additional = new_cmb2_box( array(
-		'id'           => 'ctba-entries-2016-additional',
+		'id'           => $prefix . 'additional',
 		'title'				 => __( 'Confirm your entry', 'ctba-entries-2016' ),
 		'object_types' => array( 'ctba-entries', ),
 		//'hookup'       => false,
 		//'save_fields'  => false,
 		'context'			 => 'normal',
-		'priority'		 => 'high',
+		'priority'		 => 'default',
 		'show_names'	 => 'true',
 	) );
 
 	$additional->add_field( array(
-    'name' => __( 'By Submitting this entry, I certify that the particulars given are correct to the best of my knowledge and belief.', 'ctba-entries-2016' ),
-    'id'   => 'ctba_entries_2016_additional_submit',
-    'type' => 'checkbox'
+		'name'             => __( 'Will you be sending additional supporting evidence?', 'ctba-entries-2016' ),
+		'description'			 => __( '‘if you wish to include any supporting documents please email your information to Katy Hedge at khedge@championsukplc.com.', 'ctba-entries-2016' ),
+		'id'               => 'ctba_entries_2016_additional_evidence',
+		'type'             => 'radio',
+		'show_option_none' => false,
+		'options'          => array(
+		'yes'		=> __( 'Yes', 'ctba-entries-2016' ),
+		'no'		=> __( 'No', 'ctba-entries-2016' ),
+		),
 	) );
 
 	$additional->add_field( array(
-    'name'             => __( 'Will you be sending additional supporting evidence?', 'ctba-entries-2016' ),
-    'id'               => 'ctba_entries_2016_additional_evidence',
-    'type'             => 'radio',
-    'show_option_none' => false,
-    'options'          => array(
-        'yes' => __( 'Yes', 'ctba-entries-2016' ),
-        'no'   => __( 'No', 'ctba-entries-2016' ),
-    ),
+		'name' => __( 'By Submitting this entry, I certify that the particulars given are correct to the best of my knowledge and belief.', 'ctba-entries-2016' ),
+		'id'   => 'ctba_entries_2016_additional_submit',
+		'type' => 'checkbox',
 	) );
 
 }
 add_action( 'cmb2_init', 'ctba_entries_2016_form' );
-
 
 /**
  * Gets the front-end-post-form cmb instance
@@ -921,10 +877,6 @@ add_action( 'cmb2_init', 'ctba_entries_2016_form' );
  * @return CMB2 object
  */
 function wds_frontend_cmb2_get( $metabox_id, $object_id ) {
-	// Use ID of metabox in ctba_entries_2016_form
-	//$metabox_id = '_ctba_entries_2016_common';
-	// Post/object ID is not applicable since we're using this form for submission
-	//$object_id  = 'fake-oject-id';
 	// Get CMB2 metabox object
 	return cmb2_get_metabox( $metabox_id, $object_id );
 }
@@ -937,18 +889,17 @@ function wds_frontend_cmb2_get( $metabox_id, $object_id ) {
 function ctba_cntries_2016_handle_frontend_post_form_submission() {
 
 	// Check to see if this is a new post or belongs to ctba entries post type
-	if( ( get_post_type( $_POST['object_id'] ) !== 'ctba-entries' ) && ( $_POST['object_id'] != 0 ) && ( $_POST['object_id'] < 0 ) ){
+	if ( ( get_post_type( $_POST['object_id'] ) !== 'ctba-entries' ) && ( $_POST['object_id'] != 0 ) && ( $_POST['object_id'] < 0 ) ) {
 		remove_query_arg( 'entry' );
 		wp_redirect( home_url( $path = 'nominate/entry' ) );
 	}
-
 
 	// If no form submission, bail
 	if ( empty( $_POST ) || ! isset( $_POST['submit-cmb'], $_POST['object_id'] ) ) {
 		return false;
 	}
 	// Get CMB2 metabox object
-	$cmb = wds_frontend_cmb2_get('_ctba_entries_2016_common', 'fake-object-id');
+	$cmb = wds_frontend_cmb2_get( '_ctba_entries_2016_common', 'fake-object-id' );
 	$post_data = array();
 
 	// Check security nonce
@@ -957,9 +908,9 @@ function ctba_cntries_2016_handle_frontend_post_form_submission() {
 	}
 
 	// Check Post ID is valid
-	if ( (! is_int( $_POST['object_id'] ) ) || ( ! $_POST['object_id'] >= 0 ) || floor( $_POST['object_id'] ) !== $_POST['object_id']  ) {
+	/*if ( (! is_int( $_POST['object_id'] ) ) || ( ! $_POST['object_id'] >= 0 ) || floor( $_POST['object_id'] ) !== $_POST['object_id']  ) {
 		return $cmb->prop( 'submission_error', new WP_Error( 'post_data_missing', __( 'Cannot submit your entry. Please try again' ) ) );
-	}
+	}*/
 
 	/**
 	 * Fetch sanitized values
@@ -991,7 +942,7 @@ function ctba_cntries_2016_handle_frontend_post_form_submission() {
 	foreach ( $sanitized_values as $key => $value ) {
 		if ( is_array( $value ) ) {
 			$value = array_filter( $value );
-			if( ! empty( $value ) ) {
+			if ( ! empty( $value ) ) {
 				update_post_meta( $new_submission_id, $key, $value );
 			}
 		} else {
@@ -999,47 +950,30 @@ function ctba_cntries_2016_handle_frontend_post_form_submission() {
 		}
 	}
 
-
-		$array= array(
-		'ctba-2016-categories-business',
-		'ctba-2016-categories-export',
-		'ctba-2016-categories-finance',
-		'ctba-2016-categories-legal',
-		'ctba-2016-categories-manufacturing',
-		'ctba-2016-categories-sme',
-		'ctba-2016-categories-professional',
-		'ctba-2016-categories-people',
-		'ctba-2016-categories-property',
-		'ctba-2016-categories-technology',
-		'ctba-entries-2016-additional',
+	$array = array(
+		'_ctba_entries_2016_additional',
 	);
 
+	foreach ( $array as $array_key ) {
 
-foreach ($array as $array_key) {
+		$origianl_data = wds_frontend_cmb2_get( $array_key, 'fake-oject-id' );
+		$sanitized_data = $origianl_data->get_sanitized_values( $_POST );
 
-// Biz
-	$origianl_data = wds_frontend_cmb2_get( $array_key, 'fake-oject-id');
-	//print_r($biz);
-	$sanitized_data = $origianl_data->get_sanitized_values( $_POST );
-
-	foreach ( $sanitized_data as $key => $value ) {
-		if ( is_array( $value ) ) {
-			$value = array_filter( $value );
-			if( ! empty( $value ) ) {
+		foreach ( $sanitized_data as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$value = array_filter( $value );
+				if ( ! empty( $value ) ) {
+					update_post_meta( $new_submission_id, $key, $value );
+				}
+			} else {
 				update_post_meta( $new_submission_id, $key, $value );
 			}
-		} else {
-			update_post_meta( $new_submission_id, $key, $value );
 		}
 	}
-
-
-}
-
 
 	// Remove any previous entry query arguments
 	remove_query_arg( 'entry' );
-	/*
+	/**
 	 * Redirect back to the form page with a query variable with the new post ID.
 	 * This will help double-submissions with browser refreshes
 	 */
