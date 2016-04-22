@@ -149,20 +149,19 @@ function ctba_entries_2016_form() {
 		'type'    => 'multicheck',
 		'options' =>
 		array(
-			'not-for-profit' => __( 'Not-for-profit Organisation', 'ctba-entries-2016' ),
-			'community' => __( 'Contribution to the Community', 'ctba-entries-2016' ),
-			'international-trade' => __( 'International Trade', 'ctba-entries-2016' ),
-			'creative-industries' => __( 'Creative Industries Business of the Year', 'ctba-entries-2016' ),
-			'retail' => __( 'Retail Business of the Year', 'ctba-entries-2016' ),
-			'science-technology' => __( 'Excellence in Science and Technology', 'ctba-entries-2016' ),
-			'manufacturing' => __( 'Excellence in Manufacturing', 'ctba-entries-2016' ),
-			'sales-marketing' => __( 'Sales and Marketing', 'ctba-entries-2016' ),
-			'legal' => __( 'Legal Services', 'ctba-entries-2016' ),
-			'financial' => __( 'Financial Services', 'ctba-entries-2016' ),
-			'entrepreneur' => __( 'Business Entrepreneur of the Year', 'ctba-entries-2016' ),
-			'new-business' => __( 'New Business of the Year', 'ctba-entries-2016' ),
-			'small-business' => __( 'Small Business of the Year', 'ctba-entries-2016' ),
-			'company-of-the-year' => __( 'Company of the Year', 'ctba-entries-2016' ),
+			$prefix . 'notforprofit' => __( 'Not-for-profit Organisation', 'ctba-entries-2016' ),
+			$prefix . 'community' => __( 'Contribution to the Community', 'ctba-entries-2016' ),
+			$prefix . 'trade' => __( 'International Trade', 'ctba-entries-2016' ),
+			$prefix . 'creative' => __( 'Creative Industries Business of the Year', 'ctba-entries-2016' ),
+			$prefix . 'retail' => __( 'Retail Business of the Year', 'ctba-entries-2016' ),
+			$prefix . 'technology' => __( 'Excellence in Science and Technology', 'ctba-entries-2016' ),
+			$prefix . 'manufacturing' => __( 'Excellence in Manufacturing', 'ctba-entries-2016' ),
+			$prefix . 'marketing' => __( 'Sales and Marketing', 'ctba-entries-2016' ),
+			$prefix . 'services' => __( 'Services', 'ctba-entries-2016' ),
+			$prefix . 'entrepreneur' => __( 'Business Entrepreneur of the Year', 'ctba-entries-2016' ),
+			$prefix . 'newbusiness' => __( 'New Business of the Year', 'ctba-entries-2016' ),
+			$prefix . 'smallbusiness' => __( 'Small Business of the Year', 'ctba-entries-2016' ),
+			$prefix . 'companyyear' => __( 'Company of the Year', 'ctba-entries-2016' ),
 		)
 	) );
 
@@ -836,6 +835,1011 @@ function ctba_entries_2016_form() {
 	);
 
 	/**
+	 * Services Award
+	 */
+
+	$services = new_cmb2_box( array(
+		'id'           => $prefix . 'services',
+		'title'				 => __( 'Services Award', 'ctba-entries-2016' ),
+		'object_types' => array( 'ctba-entries', ),
+		//'hookup'       => false,
+		//'save_fields'  => false,
+		'context'			 => 'normal',
+		'priority'		 => 'default',
+		'show_names'	 => 'true',
+	) );
+
+	$services->add_field( array(
+		'name'						=> __( 'Please provide details of the geographical scope of your customer or client base', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'services_geographical',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$services->add_field( array(
+		'name'						=> __( 'Please provide the names of 2 customers or clients who would be happy to endorse your award entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'services_endorse',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$services->add_field( array(
+		'name'						=> __( 'Please provide details of an innovation within your company which has helped you to achieve your objectives', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'services_innovation',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$services->add_field( array(
+		'name'						=> __( 'Please provide details of how you have created a competitive edge through service differentiation', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'services_competitive',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$services->add_field( array(
+		'name'						=> __( 'Are you accredited with a quality standard? (Please specify)', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'services_standard',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$services->add_field( array(
+		'name'						=> __( 'Are you pursuing accreditation?', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'services_accreditation',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$services->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'services_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	/**
+	 * Business Entrepreneur
+	 */
+
+	$entrepreneur = new_cmb2_box( array(
+		'id'           => $prefix . 'entrepreneur',
+		'title'				 => __( 'Business Entrepreneur of the Year', 'ctba-entries-2016' ),
+		'object_types' => array( 'ctba-entries', ),
+		//'hookup'       => false,
+		//'save_fields'  => false,
+		'context'			 => 'normal',
+		'priority'		 => 'default',
+		'show_names'	 => 'true',
+	) );
+
+	$entrepreneur->add_field( array(
+		'id'   => $prefix . 'entrepreneur_pl',
+		'name' => __( 'Profit &amp; Loss', 'ctba-entries-2016' ),
+		'type' => 'title',
+	) );
+
+	// Turnover
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Turnover (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_turnover_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Turnover (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_turnover_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Net Profit
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Net Profit (pre-tax) (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_netprofit_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Net Profit (pre-tax) (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_netprofit_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'id'   => $prefix . 'entrepreneur_balance',
+		'name' => __( 'Summary of last balance sheet', 'ctba-entries-2016' ),
+		'type' => 'title',
+	) );
+
+	// Fixed Assets
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Fixed Assets (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_fixedassets_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Fixed Assets (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_fixedassets_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Net Current Assets
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Net Current Assets (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_currentassets_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Net Current Assets (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_currentassets_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Net Assets
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Net Assets (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_netassets_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Net Assets (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_netassets_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Financed by
+
+	$entrepreneur->add_field( array(
+		'id'   => $prefix . 'entrepreneur_finance',
+		'name' => __( 'Financed by', 'ctba-entries-2016' ),
+		'type' => 'title',
+	) );
+
+	// Share Capital
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Share Capital (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_sharecapital_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Share Capital (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_sharecapital_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Retained Profit
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Retained Profit (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_retainedprofit_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Retained Profit (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_retainedprofit_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Other Reserves
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Other Reserves (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_otherreserves_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Other Reserves (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_otherreserves_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Long Term Loans
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Long Term Loans (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_longtermloans_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'Long Term Loans (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_longtermloans_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// No of Employees
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'No. of Employees (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_employees_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'    => __( 'No. of Employees (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'entrepreneur_employees_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$entrepreneur->add_field( array(
+		'name'						=> __( 'Explain your own personal business philosophy', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'entrepreneur_philosophy',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$entrepreneur->add_field( array(
+		'name'						=> __( 'Explain any successes your company has had in exploiting new opportuniities', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'entrepreneur_success',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$entrepreneur->add_field( array(
+		'name'						=> __( 'Why do you think your personal contribution has made a tangible difference to your business(es)', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'entrepreneur_personal',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$entrepreneur->add_field( array(
+		'name'						=> __( 'What examples can you give of the contribution your leadership has made', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'entrepreneur_leadership',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$entrepreneur->add_field( array(
+		'name'						=> __( 'What contribution have you made regionally to your industry / sector', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'entrepreneur_regional',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$entrepreneur->add_field( array(
+		'name'						=> __( 'How have you developed a strong working relationship with both new and existing clients', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'entrepreneur_relationship',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$entrepreneur->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'entrepreneur_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	/**
+	 * New Business of the Year
+	 */
+
+	$newbusiness = new_cmb2_box( array(
+		'id'           => $prefix . 'newbusiness',
+		'title'				 => __( 'New Business of the Year', 'ctba-entries-2016' ),
+		'object_types' => array( 'ctba-entries', ),
+		//'hookup'       => false,
+		//'save_fields'  => false,
+		'context'			 => 'normal',
+		'priority'		 => 'default',
+		'show_names'	 => 'true',
+	) );
+
+	$newbusiness->add_field( array(
+		'id'   => $prefix . 'newbusiness_figures',
+		'name' => __( 'Company figures', 'ctba-entries-2016' ),
+		'type' => 'title',
+	) );
+
+	// Sales
+	$newbusiness->add_field( array(
+		'name'    => __( 'Sales (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_sales_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'    => __( 'Sales (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_sales_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'    => __( 'Sales (Forecast this year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_sales_this',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'    => __( 'Sales (Forecast next year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_sales_next',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Net Profits
+	$newbusiness->add_field( array(
+		'name'    => __( 'Net Profits (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_netprofit_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'    => __( 'Net Profits (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_netprofit_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'    => __( 'Net Profits (Forecast this year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_netprofit_this',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'    => __( 'Net Profits (Forecast next year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_netprofit_next',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// No. of Employees
+	$newbusiness->add_field( array(
+		'name'    => __( 'No. of Employees (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_employees_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'    => __( 'No. of Employees (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_employees_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'    => __( 'No. of Employees (Forecast this year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_employees_this',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'    => __( 'No. of Employees (Forecast next year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'newbusiness_employees_next',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$newbusiness->add_field( array(
+		'name'						=> __( 'What were the initial objectives of the business? How has the business met or exceeed these goals', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'newbusiness_goals',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$newbusiness->add_field( array(
+		'name'						=> __( 'If the business started as a result of a venture capital, please explain that involvement', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'newbusiness_venturecapital',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$newbusiness->add_field( array(
+		'name'						=> __( 'What difficulties has the business faced in its particular markets', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'newbusiness_difficulties',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$newbusiness->add_field( array(
+		'name'						=> __( 'What success has the business had with exploiting new opportunities, product or marketing innovation leading to sales growth', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'newbusiness_success',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$newbusiness->add_field( array(
+		'name'						=> __( 'What evidence is there to show that the business has established a position for sustainable future success', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'newbusiness_sustainable',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$newbusiness->add_field( array(
+		'name'						=> __( 'How have you maximised the usage of resources, advisors and information available to you to improve business performance', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'newbusiness_performance',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$newbusiness->add_field( array(
+		'name'						=> __( 'How has the business developed and maintained good relationships with customers or clients and suppliers (please provide examples)', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'newbusiness_relationship',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$newbusiness->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'newbusiness_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	/**
+	 * Small Business of the Year
+	 */
+
+	$smallbusiness = new_cmb2_box( array(
+		'id'           => $prefix . 'smallbusiness',
+		'title'				 => __( 'Small Business of the Year', 'ctba-entries-2016' ),
+		'object_types' => array( 'ctba-entries', ),
+		//'hookup'       => false,
+		//'save_fields'  => false,
+		'context'			 => 'normal',
+		'priority'		 => 'default',
+		'show_names'	 => 'true',
+	) );
+
+	$smallbusiness->add_field( array(
+		'id'   => $prefix . 'smallbusiness_figures',
+		'name' => __( 'Company figures', 'ctba-entries-2016' ),
+		'type' => 'title',
+	) );
+
+	// Sales
+	$smallbusiness->add_field( array(
+		'name'    => __( 'Sales (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_sales_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'Sales (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_sales_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'Sales (Forecast this year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_sales_this',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'Sales (Forecast next year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_sales_next',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Net Profits
+	$smallbusiness->add_field( array(
+		'name'    => __( 'Net Profits (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_netprofit_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'Net Profits (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_netprofit_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'Net Profits (Forecast this year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_netprofit_this',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'Net Profits (Forecast next year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_netprofit_next',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// No. of Employees
+	$smallbusiness->add_field( array(
+		'name'    => __( 'No. of Employees (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_employees_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'No. of Employees (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_employees_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'No. of Employees (Forecast this year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_employees_this',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'No. of Employees (Forecast next year)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_employees_next',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'    => __( 'financial Year End Date (DD/MM)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'smallbusiness_yearend',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$smallbusiness->add_field( array(
+		'name'						=> __( 'What is the market for your product/service?', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'smallbusiness_market',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$smallbusiness->add_field( array(
+		'name'						=> __( 'Give details of any market research undertaken', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'smallbusiness_research',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$smallbusiness->add_field( array(
+		'name'						=> __( 'What export potential does your product/service have', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'smallbusiness_export',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$smallbusiness->add_field( array(
+		'name'						=> __( 'Highlight any design or inovation features', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'smallbusiness_features',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$smallbusiness->add_field( array(
+		'name'						=> __( 'Indicate the ambitions for the future of the business', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'smallbusiness_future',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$smallbusiness->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'smallbusiness_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	/**
+	 * Company of the Year
+	 */
+
+	$companyyear = new_cmb2_box( array(
+		'id'           => $prefix . 'companyyear',
+		'title'				 => __( 'Company of the Year', 'ctba-entries-2016' ),
+		'object_types' => array( 'ctba-entries', ),
+		//'hookup'       => false,
+		//'save_fields'  => false,
+		'context'			 => 'normal',
+		'priority'		 => 'default',
+		'show_names'	 => 'true',
+	) );
+
+	$companyyear->add_field( array(
+		'id'   => $prefix . 'companyyear_pl',
+		'name' => __( 'Profit &amp; Loss', 'ctba-entries-2016' ),
+		'type' => 'title',
+	) );
+
+	// Turnover
+	$companyyear->add_field( array(
+		'name'    => __( 'Turnover (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_turnover_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Turnover (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_turnover_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Net Profit
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Net Profit (pre-tax) (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_netprofit_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Net Profit (pre-tax) (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_netprofit_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'id'   => $prefix . 'companyyear_balance',
+		'name' => __( 'Summary of last balance sheet', 'ctba-entries-2016' ),
+		'type' => 'title',
+	) );
+
+	// Fixed Assets
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Fixed Assets (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_fixedassets_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Fixed Assets (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_fixedassets_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Net Current Assets
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Net Current Assets (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_currentassets_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Net Current Assets (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_currentassets_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Net Assets
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Net Assets (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_netassets_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Net Assets (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_netassets_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Financed by
+
+	$companyyear->add_field( array(
+		'id'   => $prefix . 'companyyear_finance',
+		'name' => __( 'Financed by', 'ctba-entries-2016' ),
+		'type' => 'title',
+	) );
+
+	// Share Capital
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Share Capital (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_sharecapital_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Share Capital (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_sharecapital_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Retained Profit
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Retained Profit (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_retainedprofit_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Retained Profit (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_retainedprofit_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Other Reserves
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Other Reserves (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_otherreserves_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Other Reserves (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_otherreserves_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// Long Term Loans
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Long Term Loans (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_longtermloans_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'Long Term Loans (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_longtermloans_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	// No of Employees
+
+	$companyyear->add_field( array(
+		'name'    => __( 'No. of Employees (2014)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_employees_2014',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'    => __( 'No. of Employees (2015)', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'companyyear_employees_2015',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(),
+	) );
+
+	$companyyear->add_field( array(
+		'name'						=> __( 'Explain any successes your company has had exploiting new opportunities', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'companyyear_opportunities',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$companyyear->add_field( array(
+		'name'						=> __( 'Outline any successes you have had with quality improvements', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'companyyear_quality',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+	$companyyear->add_field( array(
+		'name'						=> __( 'Explain any successes your company has had through product innovation', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'companyyear_innovation',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$companyyear->add_field( array(
+		'name'						=> __( 'Explain any success your company has had through production improvements', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'companyyear_product',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$companyyear->add_field( array(
+		'name'						=> __( 'Outline any successes your company has had with sales growth', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'companyyear_sales',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$companyyear->add_field( array(
+		'name'						=> __( 'What contribution have you made regionally to your industry/sector', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'companyyear_regionally',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	$companyyear->add_field( array(
+		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
+		'id' 							=> $prefix . 'companyyear_information',
+		'type'						=> 'textarea',
+		'default'					=> 'ctba_entries_set_default',
+		'attributes'			=> array(),
+		)
+	);
+
+	/**
 	 * Additional
 	 */
 
@@ -951,6 +1955,19 @@ function ctba_cntries_2016_handle_frontend_post_form_submission() {
 	}
 
 	$array = array(
+		'_ctba_entries_2016_notforprofit',
+		'_ctba_entries_2016_community',
+		'_ctba_entries_2016_trade',
+		'_ctba_entries_2016_creative',
+		'_ctba_entries_2016_retail',
+		'_ctba_entries_2016_technology',
+		'_ctba_entries_2016_manufacturing',
+		'_ctba_entries_2016_marketing',
+		'_ctba_entries_2016_services',
+		'_ctba_entries_2016_entrepreneur',
+		'_ctba_entries_2016_newbusiness',
+		'_ctba_entries_2016_smallbusiness',
+		'_ctba_entries_2016_companyyear',
 		'_ctba_entries_2016_additional',
 	);
 
