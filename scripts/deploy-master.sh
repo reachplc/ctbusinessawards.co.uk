@@ -13,7 +13,7 @@ TIMESTAMP=$(date +%Y%m%d%H%M%S)
 ssh $USERNAME@$HOST "mkdir $DEPLOY_TO/releases/$TIMESTAMP"
 
 # Copy files
-rsync -avz -e "ssh" --exclude="app/themes/ctba-2016/node_modules" ./html/ $USERNAME@$HOST:$DEPLOY_TO/releases/$timestamp
+rsync -avz -e "ssh" --exclude="app/themes/ctba-2016/node_modules" ./html/ $USERNAME@$HOST:$DEPLOY_TO/releases/$TIMESTAMP
 
 # Symlink shared folders
 ssh $USERNAME@$HOST "cd $DEPLOY_TO/releases/$TIMESTAMP/app/;ln -s $SHARED/media $CURRENT/media"
