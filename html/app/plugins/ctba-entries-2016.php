@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: CTBA Entries 2016 v3
+ * Plugin Name: CTBA Entries 2016
  * Plugin URI:
  * Description: Entry form fields for 2016 event
  * Version:     1.0.0
