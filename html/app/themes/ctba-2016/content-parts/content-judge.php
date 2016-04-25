@@ -20,7 +20,7 @@
 
       <?php if ( has_post_thumbnail() ) : ?>
       <?php the_post_thumbnail(
-    	array(280),
+    	'profile-judge',
     	array(
     		'class' => 'alignright sizemedium image'
     	)

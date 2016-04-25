@@ -19,7 +19,7 @@ get_header(); ?>
 		if ( have_posts() ) : ?>
 			<header class="page-header">
 				<h1 class="gamma heading--main page-title">Judges</h1>
-				<p>The 2015 Birmingham Post Business Awards judges are:</p>
+				<p>The 2016 coventry Telegraph Business Awards judges are:</p>
 			</header><!-- .page-header -->
 
   <ul class="judges judges__columns list">
@@ -27,12 +27,27 @@ get_header(); ?>
 			<?php
 			/* Start the Loop */
 			while ( have_posts() ) : the_post();?>
-			<?php
 
-				get_template_part( 'content-parts/content', 'ctba-judges' );
+			<li class="block judges-item box">
+			  <a href="<?php echo esc_url( get_permalink() ); ?>">
+			    <?php if ( has_post_thumbnail() ) { ?>
+					<figure>
+			    <?php
+			    the_post_thumbnail(
+			    	'profile-judge',
+			    	array(
+			    		'class' => 'image image__responsive',
+			    	)
+			    ); ?>
+			      <!--<img class="image image__responsive" src="<?php echo esc_url( get_permalink() ); ?>" alt="Profile photo of <?php the_title(); ?>">-->
+			      <figcaption class="gamma judge__name"><?php the_title(); ?></figcaption>
+			    </figure>
+			    <?php } ?>
+			  </a>
+			</li>
 
-			endwhile;
-			?>
+		<?php endwhile; ?>
+
 			</ul>
  <?php else :
 

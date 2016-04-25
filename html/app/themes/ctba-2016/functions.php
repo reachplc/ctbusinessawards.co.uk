@@ -8,85 +8,86 @@
  */
 
 if ( ! function_exists( 'ctba_2016_setup' ) ) :
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
-function ctba_2016_setup() {
-	/*
-	 * Make theme available for translation.
-	 * Translations can be filed in the /languages/ directory.
-	 * If you're building a theme based on ctba-2016, use a find and replace
-	 * to change 'ctba-2016' to the name of your theme in all the template files.
+	/**
+	 * Sets up theme defaults and registers support for various WordPress features.
+	 *
+	 * Note that this function is hooked into the after_setup_theme hook, which
+	 * runs before the init hook. The init hook is too late for some features, such
+	 * as indicating support for post thumbnails.
 	 */
-	load_theme_textdomain( 'ctba-2016', get_template_directory() . '/languages' );
+	function ctba_2016_setup() {
+		/*
+		 * Make theme available for translation.
+		 * Translations can be filed in the /languages/ directory.
+		 * If you're building a theme based on ctba-2016, use a find and replace
+		 * to change 'ctba-2016' to the name of your theme in all the template files.
+		 */
+		load_theme_textdomain( 'ctba-2016', get_template_directory() . '/languages' );
 
 		/**
 		 * Let the end user add a custom logo via the WordPress admin
 		 */
 		add_theme_support( 'custom-logo' );
 
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+		// Add default posts and comments RSS feed links to head.
+		add_theme_support( 'automatic-feed-links' );
 
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
+		/*
+		 * Let WordPress manage the document title.
+		 * By adding theme support, we declare that this theme does not use a
+		 * hard-coded <title> tag in the document head, and expect WordPress to
+		 * provide it for us.
+		 */
+		add_theme_support( 'title-tag' );
 
-	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-	 */
-	add_theme_support( 'post-thumbnails' );
+		/*
+		 * Enable support for Post Thumbnails on posts and pages.
+		 *
+		 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+		 */
+		add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus( array(
-		'primary' => esc_html__( 'Primary', 'ctba-2016' ),
-		'social'  => __( 'Social Links Menu', 'ctba-2016' ),
-		'nominate'  => __( 'Nominate Menu', 'ctba-2016' ),
-		'events'  => __( 'Events Sites', 'ctba-2016' ),
-	) );
+		// This theme uses wp_nav_menu() in one location.
+		register_nav_menus( array(
+			'primary' => esc_html__( 'Primary', 'ctba-2016' ),
+			'social'  => __( 'Social Links Menu', 'ctba-2016' ),
+			'nominate'  => __( 'Nominate Menu', 'ctba-2016' ),
+			'events'  => __( 'Events Sites', 'ctba-2016' ),
+		) );
 
-	/*
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
-	 */
-	add_theme_support( 'html5', array(
-		'search-form',
-		'comment-form',
-		'comment-list',
-		'gallery',
-		'caption',
-	) );
+		/*
+		 * Switch default core markup for search form, comment form, and comments
+		 * to output valid HTML5.
+		 */
+		add_theme_support( 'html5', array(
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+		) );
 
-	/*
-	 * Enable support for Post Formats.
-	 * See https://developer.wordpress.org/themes/functionality/post-formats/
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-	) );
+		/*
+		 * Enable support for Post Formats.
+		 * See https://developer.wordpress.org/themes/functionality/post-formats/
+		 */
+		add_theme_support( 'post-formats', array(
+			'aside',
+			'image',
+			'video',
+			'quote',
+			'link',
+		) );
 
-	// Set up the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'ctba_2016_custom_background_args', array(
-		'default-color' => 'ffffff',
-		'default-image' => '',
-	) ) );
-}
-endif;
-add_action( 'after_setup_theme', 'ctba_2016_setup' );
+		// Set up the WordPress core custom background feature.
+		add_theme_support( 'custom-background', apply_filters( 'ctba_2016_custom_background_args', array(
+			'default-color' => 'ffffff',
+			'default-image' => '',
+		) ) );
+	}
+	endif;
+
+	add_action( 'after_setup_theme', 'ctba_2016_setup' );
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -123,9 +124,9 @@ add_action( 'widgets_init', 'ctba_2016_widgets_init' );
  */
 function ctba_2016_scripts() {
 
-	wp_enqueue_style ( 'ctba-2016-fonts', '//fast.fonts.net/cssapi/2896c3ef-2b78-4bc2-9652-3329e9098a71.css', array(), '1.0.0', 'all' );
+	wp_enqueue_style( 'ctba-2016-fonts', '//fast.fonts.net/cssapi/2896c3ef-2b78-4bc2-9652-3329e9098a71.css', array(), '1.0.0', 'all' );
 
-	wp_enqueue_style( 'ctba-2016-style', get_stylesheet_uri(), array('ctba-2016-fonts'), '1.0.0' );
+	wp_enqueue_style( 'ctba-2016-style', get_stylesheet_uri(), array( 'ctba-2016-fonts' ), '1.0.0' );
 
 	wp_enqueue_script( 'ctba-2016-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
@@ -136,6 +137,24 @@ function ctba_2016_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ctba_2016_scripts' );
+
+/**
+ * Declare the custom image sizes we need to create
+ */
+function ctba_define_media_sizes() {
+
+	// Main Logo
+	add_image_size( 'logo-master', 528, 328, false );
+
+	// Partner Logo
+	add_image_size( 'logo-partner', 400, 300, false );
+
+	// Judge profile image
+	add_image_size( 'profile-judge', 480, 600, array( 'center', 'top' ) );
+
+}
+
+add_action( 'after_setup_theme', 'ctba_define_media_sizes' );
 
 /**
  * Implement the Custom Header feature.

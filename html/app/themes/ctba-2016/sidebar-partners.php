@@ -62,7 +62,7 @@ $supporter_array = new WP_Query(
     <?php if ( has_post_thumbnail() ) : ?>
     <a href="<?php echo esc_url( get_permalink() ); ?>">
       <?php the_post_thumbnail(
-    	'full',
+    	'logo-partner',
     	array(
     		'class' => 'image__responsive'
     	)
@@ -90,7 +90,7 @@ $supporter_array = new WP_Query(
 			    <?php if ( has_post_thumbnail() ) : ?>
 			    <a href="<?php echo esc_url( get_permalink() ); ?>">
 			      <?php the_post_thumbnail(
-			    	'full',
+			    	'logo-partner',
 			    	array(
 			    		'class' => 'image__responsive'
 			    	)
