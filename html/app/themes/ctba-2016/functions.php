@@ -1,4 +1,17 @@
 <?php
+
+/**
+ * Fix for ACF not being able to handle symlinks
+ * @TODO Remove when fixed or ACF is removed
+ */
+add_action( 'init', 'acf_hook', 0 );  // We use the 0 to bypass priority
+
+function acf_hook() {
+	if ( function_exists( 'acf' ) ) {
+		acf()->settings['dir'] = WP_CONTENT_URL. '/plugins/advanced-custom-fields/';
+	}
+}
+
 /**
  * ctba-2016 functions and definitions.
  *
