@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f18e6d7bad5f125953d1d5f1f8beac02",
+    "hash": "80ff2ae03752008b9afcba3e80730eea",
     "packages": [
         {
             "name": "composer/installers",
@@ -422,26 +422,6 @@
             "homepage": "https://wordpress.org/plugins/safe-redirect-manager/"
         },
         {
-            "name": "wpackagist-plugin/sf-move-login",
-            "version": "2.2.2",
-            "source": {
-                "type": "svn",
-                "url": "http://plugins.svn.wordpress.org/sf-move-login/",
-                "reference": "trunk"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/sf-move-login.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/sf-move-login/"
-        },
-        {
             "name": "wpackagist-plugin/wordpress-seo",
             "version": "3.1.2",
             "source": {
@@ -480,6 +460,26 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wp-google-analytics/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-help",
+            "version": "1.4.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-help/",
+                "reference": "tags/1.4.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-help.1.4.1.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "require": {
+                "composer/installers": "~1.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-help/"
         },
         {
             "name": "wpackagist-plugin/wp-mail-smtp",
