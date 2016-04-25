@@ -36,6 +36,12 @@ class TI_Roles_And_Capabilities {
 	      1
 	    );
 
+			add_action(
+				'wp_before_admin_bar_render',
+				array( $this, 'ti_remove_multisite_admin_link' ),
+				9999
+			);
+
   	}
 
   	/* If user is Author or below */
@@ -89,6 +95,14 @@ class TI_Roles_And_Capabilities {
   public function remove_admin_bar_space(){
   	return false;
   }
+
+	/**
+	 * Remove multisite link in admin bar
+	 */
+	public function ti_remove_multisite_admin_link( ) {
+		global $wp_admin_bar;
+		$wp_admin_bar->remove_node( 'my-sites' );
+	}
 
 }
 
