@@ -24,6 +24,11 @@ function ctba_2016_setup() {
 	 */
 	load_theme_textdomain( 'ctba-2016', get_template_directory() . '/languages' );
 
+		/**
+		 * Let the end user add a custom logo via the WordPress admin
+		 */
+		add_theme_support( 'custom-logo' );
+
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
 

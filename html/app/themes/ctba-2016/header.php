@@ -30,7 +30,7 @@
 		  <div class="wrapper__sub">
 
 		    <a class="header__brand header__left" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-		      <img class="" src="<?php echo get_template_directory_uri(); ?>/gui/logo_coventry-telegraph-business-awards-2016.png" alt="<?php bloginfo( 'name' ); ?>">
+		      <img class="" src="<?php ctba_2016_custom_logo(); ?>" alt="<?php bloginfo( 'name' ); ?>">
 		    </a>
 
 		    <nav id="site-navigation" role="navigation" class="nav__main">
