@@ -104,6 +104,7 @@ class CTBA_Partners {
 			'show_in_nav_menus'     => true,
 			'can_export'            => true,
 			'has_archive'           => true,
+			'menu_icon'							=> 'dashicons-networking',
 			'rewrite'								=> array(
 				'slug' => 'partners',
 				'with_front' => false,
@@ -136,7 +137,7 @@ class CTBA_Partners {
 
 		$rewrite = array(
 			'slug'                       => 'partner-levels',
-			'with_front'                 => true,
+			'with_front'                 => false,
 			'hierarchical'               => true,
 		);
 

@@ -100,6 +100,7 @@ class CTBA_Judges {
 			'show_in_nav_menus'     => true,
 			'can_export'            => true,
 			'has_archive'           => true,
+			'menu_icon'							=> 'dashicons-clipboard',
 			'rewrite'								=> array(
 				'slug' => 'judges',
 				'with_front' => false,

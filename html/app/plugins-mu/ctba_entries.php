@@ -100,6 +100,7 @@ class CTBA_Entries {
 			'delete_with_user'			=> false,
 			'hierarchical'          => false,
 			'has_archive'           => false,
+			'menu_icon'						=> 'dashicons-tickets-alt',
 			'query_var'           	=> true,
 			'capability_type' => array(
 				'entry',

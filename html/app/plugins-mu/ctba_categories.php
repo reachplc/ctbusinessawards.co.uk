@@ -102,6 +102,7 @@ class CTBA_Categories {
 			'show_in_nav_menus'     => true,
 			'can_export'            => true,
 			'has_archive'           => true,
+			'menu_icon'							=> 'dashicons-awards',
 			'rewrite'								=> array(
 				'slug' => 'categories',
 				'with_front' => false,
