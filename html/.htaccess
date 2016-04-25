@@ -40,6 +40,16 @@
   deny from all
 </Files>
 
+# Deny access to XMLRPC, allow access for Jetpack only
+<Files xmlrpc.php>
+Order Deny,Allow
+Deny from all
+Allow from 192.0.64.0/18
+Allow from 127.0.0.1 localhost
+Satisfy All
+ErrorDocument 403 "Access Denied. Please contact the administrator for details."
+</Files>
+
 # #####################################################################
 # # MIME TYPES AND ENCODING                                           #
 # #####################################################################
