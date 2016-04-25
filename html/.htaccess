@@ -185,3 +185,6 @@ RewriteRule . index.php [L]
 order deny,allow
 </FilesMatch>
 # END Brute Force Login Protection
+
+# This allows you to redirect index page to a specific subfolder
+Redirect 301 /index.html http://www.ctbusinessawards.co.uk/2015/
