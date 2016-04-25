@@ -8,7 +8,7 @@ phpenv local 5.5
 
 # Install PHP dependancies
 composer install --no-interaction
-./vendor/bin/phpcs --config-set installed_paths /home/rof/src/github.com/trinitymirror/ctbusinessawards.co.uk/vendor/wp-coding-standards/wpcs/
+./vendor/bin/phpcs --config-set installed_paths ./vendor/wp-coding-standards/wpcs/
 
 # Setup Node
 nvm install 0.12.7
@@ -18,11 +18,9 @@ nvm use 0.12.7
 npm install grunt-cli -g
 
 # Setup Theme
-npm install --prefix ~/clone/html/app/themes/ctba-2016/
-cd ~/clone/html/app/themes/ctba-2016/
+npm install --prefix ./html/app/themes/ctba-2016/
+cd ./html/app/themes/ctba-2016/
 bower install
 grunt dev
 cd ~/clone
-
-# Setup Plugins
-composer install --no-interaction
+#grunt --base ./html/app/themes/ctba-2016/ dev
