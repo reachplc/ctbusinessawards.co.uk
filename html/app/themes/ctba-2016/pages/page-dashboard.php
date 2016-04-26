@@ -37,13 +37,13 @@ get_header(); ?>
 				<?php the_content(); ?>
 
 				<?php if ( $get_entry->have_posts() ) : ?>
-				<table class="table--dashboard">
+				<table class="table-dashboard">
 				<thead>
 				<tr>
-				<th><?php esc_html_e( 'Company', 'ctba-2016' ); ?></th>
-				<th><?php esc_html_e( 'Categories', 'ctba-2016' ); ?></th>
-				<th><?php esc_html_e( 'Status', 'ctba-2016' ); ?></th>
-				<th><?php esc_html_e( 'Edit', 'ctba-2016' ); ?></th>
+				<th class="table-dashboard-company"><?php esc_html_e( 'Company', 'ctba-2016' ); ?></th>
+				<th class="table-dashboard-categories"><?php esc_html_e( 'Categories', 'ctba-2016' ); ?></th>
+				<th class="table-dashboard-status"><?php esc_html_e( 'Status', 'ctba-2016' ); ?></th>
+				<th class="table-dashboard-edit"><?php esc_html_e( 'Edit', 'ctba-2016' ); ?></th>
 				</tr>
 				</thead>
 				<tbody>
