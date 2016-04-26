@@ -17,7 +17,7 @@ function ctba_entries_set_title( $field_args, $field ){
 
 function ctba_entries_set_default( $field_args, $field ) {
 		$entry = get_query_var( 'entry' );
-		$value = get_post_meta( (int) $entry, $field_args[ id ], true );
+		$value = get_post_meta( (int) $entry, $field_args['id'], true );
 		return $value;
 }
 
