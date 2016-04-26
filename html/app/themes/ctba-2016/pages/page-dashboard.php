@@ -51,8 +51,11 @@ $current_user = wp_get_current_user();
 		<?php wp_nav_menu( array( 'theme_location' => 'nominate', ) ); ?>
 
 		<header class="entry-header">
-			<?php printf( '<h1 class="gamma heading--main entry-title">%1$s</h1>', __( 'Dashboard', 'ctba-2016' ) ); ?>
-		<p><?php printf( __( 'Welcome, %1$s (not you <a href="%2$s">logout</a>).', 'ctba-2016' ), $current_user->display_name, esc_url( home_url( $path = 'logout' ) ) ); ?></p>
+		<?php printf( '<h1 class="gamma heading--main entry-title">%1$s</h1>', esc_html__( 'Dashboard', 'ctba-2016' ) ); ?>
+		<p><?php
+		printf( '%1$s, %2$s ', esc_html__( 'Welcome', 'ctba-2016' ), esc_html( $current_user->display_name ) );
+		printf( '(%1$s <a href="%2$s">%3$s</a>).', esc_html__( 'not you', 'ctba-2016' ), esc_url( home_url( $path = 'logout' ) ), esc_html__( 'log out', 'ctba-2016' ) );
+		?></p>
 
 		</header><!-- .entry-header -->
 
@@ -74,6 +77,7 @@ $current_user = wp_get_current_user();
 
 		<?php while ( $get_entry->have_posts() ) : $get_entry->the_post(); ?>
 
+
 	<?php $query = site_url( '/nominate/entry/' );
 	$new_query = add_query_arg( array(
 	    'entry' => get_the_ID(),
@@ -92,7 +96,7 @@ $current_user = wp_get_current_user();
 	<?php wp_reset_postdata(); // reset the query ?>
 
 <?php else : ?>
-	<?php printf( '<button>%1$s</button>', esc_html__( 'Nominate your business', 'ctba-2016' ) ); ?>
+	<?php printf( '<a href="%2$s" class="btn">%1$s</a>', esc_html__( 'New entry form', 'ctba-2016' ), esc_url( site_url( '/nominate/entry/' ) ) ); ?>
 <?php endif; ?>
 		</div><!-- .entry-content -->
 
