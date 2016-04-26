@@ -120,7 +120,7 @@ function ctba_entries_2016_form() {
 	$common->add_field( array(
 		'name'    => __( 'No. of employees', 'ctba-entries-2016' ),
 		'id'      => $prefix .'number_employees',
-		'type'    => 'number',
+		'type'    => 'text',
 		'default' => 'ctba_entries_set_default',
 		'attributes'  => array(),
 	) );
