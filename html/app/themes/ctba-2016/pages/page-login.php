@@ -25,7 +25,7 @@ get_header(); ?>
 				<?php if ( true === $login_status ) : ?>
 					<section class="alert alert--message alert--warning alert--type box" role="alert">
 						<!--<a class="alert__close" href="#">×</a>-->
-						<p><strong>Ooops</strong> Incorrect username or password. Please try again.</p>
+						<p><?php printf( '<strong>%1$s</strong> %2$s</p>', esc_html__( 'Ooops', 'ctba-2016' ), esc_html__( 'Incorrect username or password. Please try again.', 'ctba-2016' ) ); ?>
 					</section>
 				<?php endif; ?>
 
