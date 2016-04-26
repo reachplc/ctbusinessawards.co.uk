@@ -5,7 +5,12 @@ if ( is_user_logged_in() ) {
   exit;
 }
 
+// Check if the login failed
+$login_status = ( get_query_var( 'status' ) === 'failed' ? true : false );
+
 get_header(); ?>
+
+
 
 	<div id="primary" class="content-area">
 
@@ -16,6 +21,13 @@ get_header(); ?>
 		    <?php the_title( '<h1 class="gamma heading--main page-title">', '</h1>'); ?>
 
 				<p><?php printf( __( 'Not got an account? <a href="%1$s">Click here to register</a>.', 'ctba-2016' ), home_url( $path = 'register/' ) ); ?></p>
+
+				<?php if ( true === $login_status ) : ?>
+					<section class="alert alert--message alert--warning alert--type box" role="alert">
+						<!--<a class="alert__close" href="#">×</a>-->
+						<p><strong>Ooops</strong> Incorrect username or password. Please try again.</p>
+					</section>
+				<?php endif; ?>
 
 		    <form id="member-login" action="<?php echo home_url( 'wp-login.php' ); ?>" method="POST" enctype="multipart/form-data">
 	        <fieldset id="account-details">
