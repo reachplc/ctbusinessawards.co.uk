@@ -136,3 +136,79 @@ function ctba_2016_category_transient_flusher() {
 }
 add_action( 'edit_category', 'ctba_2016_category_transient_flusher' );
 add_action( 'save_post',     'ctba_2016_category_transient_flusher' );
+
+/**
+ * Get users entries
+ */
+function get_entry( $user_id ) {
+
+	$custom_query = new WP_Query(
+		array(
+			'author'						=> $user_id,
+			'post_type'					=> 'ctba-entries',
+			'post_status'				=> array(
+				'publish',
+				'pending',
+			),
+			'posts_per_page'		=> 25,
+		)
+	);
+
+	return $custom_query;
+
+}
+
+/**
+ * Return entries status as string
+ */
+function the_post_status() {
+
+	if ( 'published' === get_post_status( get_the_ID() ) ) {
+		esc_html_e( 'Submitted', 'ctba-2016' );
+	} else {
+		esc_html_e( 'Pending', 'ctba-2016' );
+	}
+}
+
+/* Return entered categories as comma seperated string */
+function get_entered_categories( ) {
+	// Key Value array of categories and their titles
+	// @TODO extract this out some how. Reducing the duplication throughout the site
+	$output = array();
+
+	$categories = array(
+		'_ctba_entries_2016_notforprofit'	=> __( 'Not-for-profit Organisation', 'ctba-2016' ),
+		'_ctba_entries_2016_community'	=> __( 'Contribution to the Community', 'ctba-2016' ),
+		'_ctba_entries_2016_trade'	=> __( 'International Trade', 'ctba-2016' ),
+		'_ctba_entries_2016_creative'	=> __( 'Creative Industries Business of the Year', 'ctba-2016' ),
+		'_ctba_entries_2016_retail'	=> __( 'Retail Business of the Year', 'ctba-2016' ),
+		'_ctba_entries_2016_technology'	=> __( 'Excellence in Science and Technology', 'ctba-2016' ),
+		'_ctba_entries_2016_manufacturing'	=> __( 'Excellence in Manufacturing', 'ctba-2016' ),
+		'_ctba_entries_2016_marketing'	=> __( 'Sales and Marketing', 'ctba-2016' ),
+		'_ctba_entries_2016_services'	=> __( 'Services', 'ctba-2016' ),
+		'_ctba_entries_2016_entrepreneur'	=> __( 'Business Entrepreneur of the Year', 'ctba-2016' ),
+		'_ctba_entries_2016_newbusiness'	=> __( 'New Business of the Year', 'ctba-2016' ),
+		'_ctba_entries_2016_smallbusiness'	=> __( 'Small Business of the Year', 'ctba-2016' ),
+		'_ctba_entries_2016_companyyear'	=> __( 'Company of the Year', 'ctba-2016' ),
+	);
+
+	$data = get_post_meta( get_the_ID(), 'ctba_entries_2016_categories', true );
+
+	foreach ( $data as $key ) {
+		array_push( $output, $categories[ $key ] );
+	}
+
+	return implode( ', ', $output );
+
+}
+
+/**
+ * Build our edit link by apending the post id to the entries url
+ */
+function edit_entries_link() {
+	$query = site_url( '/nominate/entry/' );
+	$new_query = add_query_arg( array(
+		'entry' => get_the_ID(),
+	), $query );
+	return $new_query;
+}
