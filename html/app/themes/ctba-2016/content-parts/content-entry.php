@@ -11,7 +11,7 @@ $entry = get_query_var( 'entry' );
 $object_id = ( get_query_var( 'entry' ) !== '' ? $entry : 0 );
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="entry-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<?php the_title( '<h1 class="gamma heading--main entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
@@ -52,7 +52,7 @@ function get_meta_boxes(){
 		),
 		'_ctba_entries_2016_retail' => array(
 			'title' => 'Retail Business of the Year',
-			'js-id' => 'js-entries-additional',
+			'js-id' => '_ctba_entries_2016_retail',
 		),
 		'_ctba_entries_2016_technology' => array(
 			'title' => 'Excellence in Science and Technology',
@@ -104,9 +104,11 @@ $args = array(
 	'save_fields' => false,
 );
 
+
 //$form;
 foreach ( get_meta_boxes() as $metabox => $options ) { // loop over config array ?>
-	<div id="<?php echo esc_attr( $options['js-id'] ); ?>" class="form-table">
+	<?php $category_status = ( ! in_array( $metabox, array( '_ctba_entries_2016_common', '_ctba_entries_2016_additional' ) ) ) ? 'data-state="visible"' : null; ?>
+	<div id="<?php echo esc_attr( $options['js-id'] ); ?>" class="entry-category form-table" <?php echo esc_html( $category_status ); ?>>
 	<h2 class="gamma heading--main"><?php echo esc_html( $options['title'] ); ?></h2>
 	<?php cmb2_metabox_form( $metabox, $object_id, $args ); ?>
 	<button type="submit" name="submit-cmb" value="Submit" class="btn btn--primary">Save</button>
@@ -133,4 +135,4 @@ foreach ( get_meta_boxes() as $metabox => $options ) { // loop over config array
 		);
 	?>
 
-</article><!-- #post-## -->
+</article><!-- #entry-<?php the_ID(); ?> -->
