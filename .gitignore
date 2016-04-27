@@ -60,3 +60,8 @@ html/app/themes/*
 #### White-list Themes
 !html/app/themes/index.php
 !html/app/themes/ctba-2016/
+
+#### CTBA 2016
+html/app/themes/ctba-2016/style.css
+html/app/themes/ctba-2016/bower_components/
+html/app/themes/ctba-2016/node_modules/
