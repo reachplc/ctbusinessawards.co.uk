@@ -1,5 +1,30 @@
 (function( $ ) {
 
+	/**
+	 * Limit selection of categories to 3
+	 * @TODO Add option to control max number of categories
+	 */
+
+	function limitCategoriesSelection() {
+
+		// Get the ammount of categories checked
+		var categories = $( '.cmb2-id-ctba-entries-2016-categories .cmb2-checkbox-list input:checked' ).length;
+
+		// Check if 3 catergoies are chosen
+		if ( 3 <= categories ) {
+			$( '.cmb2-id-ctba-entries-2016-categories  .cmb2-checkbox-list input:checkbox:not( :checked )' ).attr( 'disabled', true );
+		}
+
+		// Check if less than 3 catergoies are chosen
+		if ( 3 > categories ) {
+			$( '.cmb2-id-ctba-entries-2016-categories .cmb2-checkbox-list input:checkbox:not( :checked )' ).attr( 'disabled', false );
+		}
+	}
+
+	/**
+	 * Toggle Category display on multi checkbox
+	 */
+
 	function toggleCategoryDisplay() {
 
 		// Get all check boxes that are not checked
@@ -19,9 +44,6 @@
 			// Get value from input box
 			var _catid = $( this ).val();
 
-			// Add visible class to selected checkbox
-			$( this ).parent( 'li' ).toggleClass( 'is_visible' );
-
 			// Show question id from value checked
 			if ( $( this ).is( ':checked' ) ) {
 				$( '#' + _catid ).attr( 'data-state', 'visible' );
@@ -34,6 +56,10 @@
 		});
 	}
 
-	$( document ).ready( toggleCategoryDisplay() ); // $( document ).ready
+	$( document ).ready( toggleCategoryDisplay() );
+
+	$( document ).ready( limitCategoriesSelection() );
+
+	$( '.cmb2-id-ctba-entries-2016-categories .cmb2-checkbox-list input' ).on( 'click', limitCategoriesSelection );
 
 } )( jQuery );
