@@ -169,6 +169,31 @@ function ctba_define_media_sizes() {
 
 add_action( 'after_setup_theme', 'ctba_define_media_sizes' );
 
+function add_query_vars_login( $vars ){
+	$vars[] = 'status';
+	return $vars;
+}
+
+add_filter( 'query_vars', 'add_query_vars_login' );
+
+/**
+ * Redirect failed login to referrer page
+ */
+
+function my_front_end_login_fail( $username ) {
+	// Check if referer is present
+	if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+		$referrer = esc_url( $_SERVER['HTTP_REFERER'] );
+	}
+	// if there's a valid referrer, and it's not the default log-in screen
+	if ( ! empty( $referrer ) && ! strstr( $referrer,'wp-login' ) && ! strstr( $referrer,'wp-admin' ) ) {
+		wp_redirect( esc_url_raw( add_query_arg( array( 'status' => 'failed' ), $referrer ) ) );
+		exit;
+	}
+}
+
+add_action( 'wp_login_failed', 'my_front_end_login_fail' );
+
 /**
  * Implement the Custom Header feature.
  */
