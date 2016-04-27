@@ -136,3 +136,15 @@ foreach ( get_meta_boxes() as $metabox => $options ) { // loop over config array
 	?>
 
 </article><!-- #entry-<?php the_ID(); ?> -->
+
+<section id="ctba-alert" class="alert alert--message alert--type box" role="alert" data-state="hidden">
+	<!--<a class="alert__close" href="#">×</a>-->
+	<p>
+	<?php printf(
+		'<strong>%1$s</strong> %2$s</p>',
+		esc_html__( 'Info', 'ctba-2016' ),
+		esc_html__( 'Entry&rsquo;s are limited to 3 categories.', 'ctba-2016' )
+	); ?>
+	</p>
+
+</section>

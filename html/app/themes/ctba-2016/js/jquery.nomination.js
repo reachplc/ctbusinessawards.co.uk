@@ -1,6 +1,40 @@
 (function( $ ) {
 
 	/**
+	 * Add Message
+	 */
+
+	 function addMessage( location, name, type, heading, message ) {
+
+		// Set default values if not supplied
+		type = ( 'undefined' !== typeof type ? type : 'warning' );
+		heading = ( 'undefined' !== typeof heading ? heading : 'Oops' );
+		message = ( 'undefined' !== typeof message ? message : 'Looks like something has gone wrong' );
+
+		$( '#ctba-alert' )
+			.clone()
+			.prependTo( location )
+			.attr( 'id', name )
+			.addClass( 'alert--' + type )
+			.html( '<p><strong>' + heading + '</strong> ' + message + '</p>' )
+			.attr( 'data-state', 'visible' );
+
+	 }
+
+	/**
+	 * Remove Message
+	 */
+
+	function removeMessage( id ) {
+
+		// Check if message is in DOM
+		if ( $( id ).length ) {
+			$( id ).remove();
+		}
+		return false;
+	}
+
+	/**
 	 * Limit selection of categories to 3
 	 * @TODO Add option to control max number of categories
 	 */
@@ -13,12 +47,15 @@
 		// Check if 3 catergoies are chosen
 		if ( 3 <= categories ) {
 			$( '.cmb2-id-ctba-entries-2016-categories  .cmb2-checkbox-list input:checkbox:not( :checked )' ).attr( 'disabled', true );
+			addMessage( '.cmb2-id-ctba-entries-2016-categories', 'alert-category-limit', 'info', 'Info', 'Entry&rsquo;s are limited to 3 categories.' );
 		}
 
 		// Check if less than 3 catergoies are chosen
 		if ( 3 > categories ) {
 			$( '.cmb2-id-ctba-entries-2016-categories .cmb2-checkbox-list input:checkbox:not( :checked )' ).attr( 'disabled', false );
+			removeMessage( '#alert-category-limit' );
 		}
+
 	}
 
 	/**
@@ -60,6 +97,7 @@
 
 	$( document ).ready( limitCategoriesSelection() );
 
-	$( '.cmb2-id-ctba-entries-2016-categories .cmb2-checkbox-list input' ).on( 'click', limitCategoriesSelection );
+	$( '.cmb2-id-ctba-entries-2016-categories .cmb2-checkbox-list input' )
+		.on( 'click', limitCategoriesSelection );
 
 } )( jQuery );
