@@ -21,6 +21,8 @@
 
 <body <?php if ( ! get_field( 'hero_hide' ) ) { body_class( 'has-hero' ); } else { body_class(); }; ?>>
 
+	<?php if ( function_exists( 'HM_GTM\tag' ) ) { HM_GTM\tag(); } ?>
+
 	<div id="page" class="site">
 		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'ctba-2016' ); ?></a>
 
