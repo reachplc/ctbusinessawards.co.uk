@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2f3b10d56604fcf2e4198d2359b04366",
+    "hash": "468359697cfa40dae2475f5045995f25",
     "packages": [
         {
             "name": "composer/installers",
@@ -110,9 +110,15 @@
             "name": "humanmade/hm-gtm",
             "version": "1.0",
             "source": {
-                "type": "git",
-                "url": "git://github.com/humanmade/hm-gtm.git",
+                "type": "vcs",
+                "url": "https://github.com/humanmade/hm-gtm.git",
                 "reference": "origin/master"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/humanmade/hm-gtm/archive/master.zip",
+                "reference": null,
+                "shasum": null
             },
             "type": "wordpress-muplugin"
         },

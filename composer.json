@@ -16,7 +16,7 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "http://wpackagist.org"
+      "url": "https://wpackagist.org"
     },
 		{
 			"type": "package",
@@ -25,9 +25,13 @@
 				"type": "wordpress-muplugin",
 				"version": "1.0",
 				"source": {
-					"url": "git://github.com/humanmade/hm-gtm.git",
-					"type": "git",
+					"url": "https://github.com/humanmade/hm-gtm.git",
+					"type": "vcs",
 					"reference": "origin/master"
+				},
+				"dist": {
+						"type": "zip",
+						"url": "https://github.com/humanmade/hm-gtm/archive/master.zip"
 				}
 			}
 		}
