@@ -170,9 +170,28 @@ function ctba_define_media_sizes() {
 	// Judge profile image
 	add_image_size( 'profile-judge', 480, 600, array( 'center', 'top' ) );
 
+	// Category Icon
+	add_image_size( 'icon-category', 88, 88, false );
+
 }
 
 add_action( 'after_setup_theme', 'ctba_define_media_sizes' );
+
+/**
+ * Alter the default WP Query for Categries post type
+ */
+function change_archive_posts_per_page( $query ) {
+	if ( $query->is_main_query() && ! is_admin() && is_post_type_archive( 'ctba_categories' ) ) {
+		$query->set( 'posts_per_page', '30' );
+	}
+}
+
+add_action( 'pre_get_posts', 'change_archive_posts_per_page' );
+
+
+/**
+ * Add custom query variable for failed logins.
+ */
 
 function add_query_vars_login( $vars ){
 	$vars[] = 'status';
