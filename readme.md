@@ -30,6 +30,12 @@ git clone https://github.com/trinitymirror/ctbusinessawards.co.uk.git ctbusiness
 cd ctbusinessawards.co.uk
 ```
 
+Copy the `sample.env` file and rename it to `.env`.
+
+```
+cp ./sample.env ./.env
+```
+
 Run Vagrant:
 
 ```
@@ -39,6 +45,18 @@ vagrant up
 ### View the development site
 
 Visit [http://www.ctbusinessawards.dev](http://www.ctbusinessawards.dev/) to view the development site.
+
+### Accessing the MySQL database
+
+Vagrant's MySQL database can be accessed through SSH using the following credentials:
+
+- SSH Host: 192.168.33.100
+- SSH User: vagrant
+- SSH Password: vagrant
+- MySQL Host: 127.0.0.1
+- MySQL User: root
+- MySQL Password: root
+- MySQL Database: wordpress
 
 ### Testing Your Changes
 
@@ -106,7 +124,7 @@ If you spot any issues please create a ticket via GitHub's Issue Tracker. includ
 
 ## Contributing to this project
 
-In lieu of a formal style guide, take care to maintain the existing coding style.
+This project follow the WordPress Coding Standard for [PHP](https://make.wordpress.org/core/handbook/best-practices/coding-standards/php/), [HTML](https://make.wordpress.org/core/handbook/best-practices/coding-standards/html/), [CSS](https://make.wordpress.org/core/handbook/best-practices/coding-standards/css/) and [JavaScript](https://make.wordpress.org/core/handbook/best-practices/coding-standards/javascript/).
 
 ## Contact
 
