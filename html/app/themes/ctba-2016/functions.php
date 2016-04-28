@@ -170,6 +170,9 @@ function ctba_define_media_sizes() {
 	// Judge profile image
 	add_image_size( 'profile-judge', 480, 600, array( 'center', 'top' ) );
 
+	// Category Icon
+	add_image_size( 'icon-category', 88, 88, false );
+
 }
 
 add_action( 'after_setup_theme', 'ctba_define_media_sizes' );
