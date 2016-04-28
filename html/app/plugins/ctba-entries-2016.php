@@ -147,6 +147,7 @@ function ctba_entries_2016_form() {
 		'name'    => __( 'Choose the categories you would like to enter', 'ctba-entries-2016' ),
 		'id'      => 'ctba_entries_2016_categories',
 		'type'    => 'multicheck',
+		'select_all_button' => false,
 		'options' =>
 		array(
 			$prefix . 'notforprofit' => __( 'Not-for-profit Organisation', 'ctba-entries-2016' ),
