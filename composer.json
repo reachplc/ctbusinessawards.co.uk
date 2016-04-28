@@ -17,7 +17,20 @@
     {
       "type": "composer",
       "url": "http://wpackagist.org"
-    }
+    },
+		{
+			"type": "package",
+			"package": {
+				"name": "humanmade/hm-gtm",
+				"type": "wordpress-muplugin",
+				"version": "1.0",
+				"source": {
+					"url": "git://github.com/humanmade/hm-gtm.git",
+					"type": "git",
+					"reference": "origin/master"
+				}
+			}
+		}
   ],
   "require": {
     "php": ">=5.4",
@@ -26,7 +39,6 @@
     "composer/installers": "1.0.x",
     "wpackagist-plugin/buddypress": "2.5.x",
     "wpackagist-plugin/wordpress-seo": "3.1.x",
-    "wpackagist-plugin/wp-google-analytics": "1.4.x",
     "wpackagist-plugin/google-sitemap-generator": "4.0.x",
     "wpackagist-plugin/wp-robots-txt": "1.1.x",
     "wpackagist-plugin/wp-security-audit-log": "2.4.x",
@@ -38,7 +50,8 @@
     "wpackagist-plugin/custom-contact-forms": "7.8.x",
 		"wpackagist-plugin/wp-mail-smtp": "0.9.x",
 		"wpackagist-plugin/wp-help": "1.4.x",
-    "wpackagist-plugin/cmb2": "2.2.x"
+    "wpackagist-plugin/cmb2": "2.2.x",
+		"humanmade/hm-gtm": "1.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "~2.4",
