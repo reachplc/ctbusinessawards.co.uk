@@ -14,16 +14,19 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 
 <aside id="secondary" class="widget-area" role="complementary">
 
-
 <article class="box separator--horizontal" itemscope itemtype="http://schema.org/Event">
+
+	<?php // @TODO allow user to change details via admin ?>
+
   <h3 class="gamma heading--main">Awards Ceremony</h3>
 
   <img class="image image__responsive" src="<?php echo get_template_directory_uri(); ?>/gui/venue_ricoh-arena.jpg" alt="">
 
-  <h4 itemprop="startDate" content="2016-06-17">Friday, 17&nbsp;June&nbsp;2016</h4>
+  <h4 itemprop="startDate" content="2016-10-20">Thursday, 20&nbsp;October&nbsp;2016</h4>
   <p itemprop="location" itemscope itemtype="http://schema.org/Place">
   <span itemprop="streetAddress"><strong>Ricoh&nbsp;Arena</strong><br>
   Phoenix&nbsp;Way</span>, <span itemprop="addressLocality">Coventry</span>. <span itemprop="postalCode">CV6&nbsp;6GE</span></p>
+	<p>Champagne reception from <span itemprop="doorTime" content="T18:30">6:30pm</span>.</p>
   <!--<p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
    <a itemprop="url" class="btn btn--primary btn__full" href="{{ site.url }}/tickets/">Book your tickets/table&nbsp;now</a>
  </p>-->
