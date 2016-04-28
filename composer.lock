@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "80ff2ae03752008b9afcba3e80730eea",
+    "hash": "2f3b10d56604fcf2e4198d2359b04366",
     "packages": [
         {
             "name": "composer/installers",
@@ -107,17 +107,27 @@
             "time": "2016-04-13 19:46:30"
         },
         {
+            "name": "humanmade/hm-gtm",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/humanmade/hm-gtm.git",
+                "reference": "origin/master"
+            },
+            "type": "wordpress-muplugin"
+        },
+        {
             "name": "johnpbloch/wordpress",
-            "version": "4.5",
+            "version": "4.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/johnpbloch/wordpress.git",
-                "reference": "a975896d0806f3dc1ccf3e170f91226440b267cb"
+                "reference": "494c0f663ff292334947097192392663b596a49e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/a975896d0806f3dc1ccf3e170f91226440b267cb",
-                "reference": "a975896d0806f3dc1ccf3e170f91226440b267cb",
+                "url": "https://api.github.com/repos/johnpbloch/wordpress/zipball/494c0f663ff292334947097192392663b596a49e",
+                "reference": "494c0f663ff292334947097192392663b596a49e",
                 "shasum": ""
             },
             "require": {
@@ -141,7 +151,7 @@
                 "blog",
                 "cms"
             ],
-            "time": "2016-04-12 17:46:20"
+            "time": "2016-04-26 18:01:25"
         },
         {
             "name": "johnpbloch/wordpress-core-installer",
@@ -442,26 +452,6 @@
             "homepage": "https://wordpress.org/plugins/wordpress-seo/"
         },
         {
-            "name": "wpackagist-plugin/wp-google-analytics",
-            "version": "1.4.1",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-google-analytics/",
-                "reference": "tags/1.4.1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-google-analytics.1.4.1.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wp-google-analytics/"
-        },
-        {
             "name": "wpackagist-plugin/wp-help",
             "version": "1.4.1",
             "source": {
@@ -523,15 +513,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-security-audit-log",
-            "version": "2.4.1",
+            "version": "2.4.2",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-security-audit-log/",
-                "reference": "tags/2.4.1"
+                "reference": "tags/2.4.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-security-audit-log.2.4.1.zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-security-audit-log.2.4.2.zip",
                 "reference": null,
                 "shasum": null
             },
