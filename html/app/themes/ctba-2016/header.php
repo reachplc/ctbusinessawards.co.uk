@@ -26,13 +26,10 @@
 	<div id="page" class="site">
 		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'ctba-2016' ); ?></a>
 
-
 		<header class="header__main site-header fixed cf" id="masthead" role="banner">
 		  <div class="wrapper__sub">
 
-		    <a class="header__brand header__left" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-		      <img class="" src="<?php ctba_2016_custom_logo(); ?>" alt="<?php bloginfo( 'name' ); ?>">
-		    </a>
+				<?php echo ctba_2016_custom_logo(); ?>
 
 		    <nav id="site-navigation" role="navigation" class="nav__main">
 

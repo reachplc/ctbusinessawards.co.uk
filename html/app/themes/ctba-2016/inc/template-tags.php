@@ -1,28 +1,4 @@
 <?php
-/**
- * Custom template tags for this theme.
- *
- * Eventually, some of the functionality here could be replaced by core features.
- *
- * @package ctba-2016
- */
-
-if ( ! function_exists( 'ctba_2016_custom_logo' ) ) {
-
-	function ctba_2016_custom_logo() {
-		$output = '';
-		// Try to retrieve the Custom Logo
-		if ( function_exists( 'get_custom_logo' ) ) {
-			$output = get_custom_logo();
-			// Nothing in the output: Custom Logo is not supported, or there is no selected logo
-			if ( empty( $output ) ) {
-				$output = get_template_directory_uri() . '/gui/logo_coventry-telegraph-business-awards.png';
-			}
-		}
-		echo esc_url( $output );
-	}
-
-}
 
 if ( ! function_exists( 'ctba_2016_posted_on' ) ) :
 /**
