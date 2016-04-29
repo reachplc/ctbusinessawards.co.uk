@@ -19,6 +19,9 @@ bin
 .vagrant
 vendor/*
 
+## PHP
+composer.lock
+
 ## NodeJS
 
 node_modules/
