@@ -59,7 +59,7 @@
 
     <div class="hero__content">
       <?php if( get_field( 'hero_tagline' ) ){ ?><p class="hero__copy gamma"><?php the_field( 'hero_tagline' ); ?></p><?php } else { echo '<p class="hero__copy gamma">Celebrate your success in business with the Coventry Telegraph.</p>'; } ?>
-      <?php if( get_field( 'hero_btn' ) ){ ?><a class="hero__btn btn btn--primary" href="<?php the_field( 'hero_btn_link' ); ?>"><?php the_field( 'hero_btn_text' ); ?></a><?php } ?>
+      <?php if( get_field( 'hero_btn_link' ) ){ ?><a class="hero__btn btn btn--primary" href="<?php the_field( 'hero_btn_link' ); ?>"><?php the_field( 'hero_btn_text' ); ?></a><?php } ?>
     </div>
 
   </section>
