@@ -180,13 +180,15 @@ add_action( 'after_setup_theme', 'ctba_define_media_sizes' );
 /**
  * Alter the default WP Query for Categries post type
  */
-function change_archive_posts_per_page( $query ) {
+function change_archive_categories_loop( $query ) {
 	if ( $query->is_main_query() && ! is_admin() && is_post_type_archive( 'ctba_categories' ) ) {
 		$query->set( 'posts_per_page', '30' );
+		$query->set( 'order', 'ASC' );
+		$query->set( 'orderby', 'menu_order' );
 	}
 }
 
-add_action( 'pre_get_posts', 'change_archive_posts_per_page' );
+add_action( 'pre_get_posts', 'change_archive_categories_loop' );
 
 
 /**
