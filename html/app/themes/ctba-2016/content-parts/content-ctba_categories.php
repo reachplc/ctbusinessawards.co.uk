@@ -14,7 +14,7 @@
   <a href="<?php echo esc_url( get_permalink() ); ?>">
 		<?php
 		if ( has_post_thumbnail() ) {
-			the_post_thumbnail( array( 44, 44 ), array( 'class' => '' ) );
+			the_post_thumbnail( array( 88, 88 ), array( 'class' => '' ) );
 		}
 		?>
   </a>
