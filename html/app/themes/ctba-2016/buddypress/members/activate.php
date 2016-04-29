@@ -40,7 +40,7 @@
 			<?php if ( isset( $_GET['e'] ) ) : ?>
 				<p><?php _e( 'Your account was activated successfully! Your account details have been sent to you in a separate email.', 'buddypress' ); ?></p>
 			<?php else : ?>
-				<p><?php printf( __( 'Your account was activated successfully! You can now <a href="%s">log in</a> with the username and password you provided when you signed up.', 'buddypress' ), home_url( $path = 'login' ) ); ?></p>
+				<p><?php printf( __( 'Your account was activated successfully! You can now <strong><a href="%s">log in</a></strong> with the username and password you provided when you signed up.', 'buddypress' ), home_url( $path = 'login' ) ); ?></p>
 			<?php endif; ?>
 
 		<?php else : ?>
