@@ -222,6 +222,15 @@ function my_front_end_login_fail( $username ) {
 add_action( 'wp_login_failed', 'my_front_end_login_fail' );
 
 /**
+ * Set up Editor stylesheet
+ */
+function ctba_2016_add_editor_styles() {
+	add_editor_style( 'editor-style.css' );
+}
+
+add_action( 'admin_init', 'ctba_2016_add_editor_styles' );
+
+/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
