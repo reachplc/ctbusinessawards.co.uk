@@ -111,12 +111,14 @@ foreach ( get_meta_boxes() as $metabox => $options ) { // loop over config array
 	<div id="<?php echo esc_attr( $options['js-id'] ); ?>" class="entry-category form-table" <?php echo esc_html( $category_status ); ?>>
 	<h2 class="gamma heading--main"><?php echo esc_html( $options['title'] ); ?></h2>
 	<?php cmb2_metabox_form( $metabox, $object_id, $args ); ?>
-	<button type="submit" name="submit-cmb" value="Submit" class="btn btn--primary">Save</button>
+	<div class="save-button">
+		<button type="submit" name="submit-cmb" value="Submit" class="btn btn--primary">Save</button>
+	</div>
 	</div>
 <?php } ?>
-
+<div class="submit-button">
 <input type="submit" name="submit-cmb" value="Submit" class="btn btn--primary">
-
+</div>
 </form>
 
 
