@@ -102,32 +102,7 @@ class CTBA_Entries {
 			'has_archive'           => false,
 			'menu_icon'						=> 'dashicons-tickets-alt',
 			'query_var'           	=> true,
-			'capability_type' => array(
-				'entry',
-				'entries'
-			),
-			'map_meta_cap'        	=> true,
-			'capabilities' => array(
-				// meta caps (don't assign these to roles)
-				'edit_post'              => 'edit_entry',
-				'read_post'              => 'read_entry',
-				'delete_post'            => 'delete_entry',
-				// primitive/meta caps
-				'create_posts'           => 'create_entries',
-				// primitive caps used outside of map_meta_cap()
-				'edit_posts'             => 'edit_entries',
-				'edit_others_posts'      => 'edit_others_entries',
-				'publish_posts'          => 'publish_entries',
-				'read_private_posts'     => 'read_private_entries',
-				// primitive caps used inside of map_meta_cap()
-				'read'                   => 'read_entry',
-				'delete_posts'           => 'delete_entries',
-				'delete_private_posts'   => 'delete_private_entries',
-				'delete_published_posts' => 'delete_published_entries',
-				'delete_others_posts'    => 'delete_others_entries',
-				'edit_private_posts'     => 'edit_private_entries',
-				'edit_published_posts'   => 'edit_published_entries'
-			),
+			'capability_type'       => 'page',
 			'rewrite'									 => array(
 				'slug'			 => 'entries',
 				'with_front' => false,
@@ -167,8 +142,9 @@ class CTBA_Entries {
 	}
 
 	public function add_query_vars_filter( $vars ){
-	  $vars[] = "entry";
-	  return $vars;
+		$vars[] = 'entry';
+		$vars[] .= 'status';
+		return $vars;
 	}
 
 }

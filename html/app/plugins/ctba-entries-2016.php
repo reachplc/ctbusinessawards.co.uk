@@ -1934,7 +1934,7 @@ function ctba_cntries_2016_handle_frontend_post_form_submission() {
 	// Set the post type we want to submit.
 	$post_data['post_type'] = 'ctba-entries';
 	// Set the status of of post
-	$post_data['post_status'] = ( $_POST['ctba_entries_2016_additional_submit'] == 'on' ? 'publish' : 'pending' );
+	$post_data['post_status'] = ( 'on' === $_POST['ctba_entries_2016_additional_submit'] ? 'publish' : 'pending' );
 
 	// Create the new post
 	$new_submission_id = wp_insert_post( $post_data, true );
@@ -1995,7 +1995,31 @@ function ctba_cntries_2016_handle_frontend_post_form_submission() {
 	 * Redirect back to the form page with a query variable with the new post ID.
 	 * This will help double-submissions with browser refreshes
 	 */
-	wp_redirect( esc_url_raw( add_query_arg( 'entry', $new_submission_id ) ) );
+	if ( 'on' === $_POST['ctba_entries_2016_additional_submit'] ) {
+		wp_redirect(
+			esc_url_raw(
+				add_query_arg(
+					array(
+						'status' => 'submitted',
+					),
+					home_url( '/nominate/dashboard/' )
+				)
+			)
+		);
+		exit;
+	}
+
+	wp_redirect(
+		esc_url_raw(
+			add_query_arg(
+				array(
+					'entry' => $new_submission_id,
+					'status' => 'saved',
+				)
+			)
+		)
+	);
 	exit;
 }
+
 add_action( 'cmb2_after_init', 'ctba_cntries_2016_handle_frontend_post_form_submission' );
