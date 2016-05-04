@@ -16,7 +16,7 @@ if ( ! function_exists( 'ctba_2016_custom_logo' ) ) {
 			'<a href="%1$s" rel="home"><img class="" src="%2$s" alt="%3$s"></a>',
 			esc_url( home_url( '/' ) ),
 			esc_url( get_template_directory_uri() . '/gui/logo_coventry-telegraph-business-awards-2016.png' ),
-			'test' //bloginfo( 'name' )
+			esc_url( get_bloginfo( 'name' ) )
 		);
 
 		if ( function_exists( 'get_custom_logo' ) ) {
