@@ -10,6 +10,9 @@
 if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 	return;
 }
+
+$event_tickets = false;
+
 ?>
 
 <aside id="secondary" class="widget-area" role="complementary">
@@ -20,16 +23,18 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 
   <h3 class="gamma heading--main">Awards Ceremony</h3>
 
-  <img class="image image__responsive" src="<?php echo get_template_directory_uri(); ?>/gui/venue_ricoh-arena.jpg" alt="">
+  <img class="image image__responsive" src="<?php echo esc_url( get_template_directory_uri() .'/gui/venue_ricoh-arena.jpg' ); ?>" alt="">
 
-  <h4 itemprop="startDate" content="2016-10-20">Thursday, 20&nbsp;October&nbsp;2016</h4>
+  <h4 itemprop="startDate" content="2016-10-20T16:30">Thursday, 20&nbsp;October&nbsp;2016</h4>
   <p itemprop="location" itemscope itemtype="http://schema.org/Place">
-  <span itemprop="streetAddress"><strong>Ricoh&nbsp;Arena</strong><br>
-  Phoenix&nbsp;Way</span>, <span itemprop="addressLocality">Coventry</span>. <span itemprop="postalCode">CV6&nbsp;6GE</span></p>
-	<p>Champagne reception from <span itemprop="doorTime" content="T18:30">6:30pm</span>.</p>
-  <!--<p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-   <a itemprop="url" class="btn btn--primary btn__full" href="{{ site.url }}/tickets/">Book your tickets/table&nbsp;now</a>
- </p>-->
+  <strong itemprop="name">Ricoh&nbsp;Arena</strong>, <span itemprop="streetAddress">Phoenix&nbsp;Way</span>,<br>
+	<span itemprop="addressLocality">Coventry</span>. <span itemprop="postalCode">CV6&nbsp;6GE</span></p>
+	<p>Champagne reception from <span itemprop="doorTime" content="18:30">6:30pm</span>.</p>
+	<?php if ( true === $event_tickets ) { ?>
+	<p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+	<a itemprop="url" class="btn btn--primary btn__full" href="{{ site.url }}/tickets/">Book your tickets/table&nbsp;now</a>
+	</p>
+	<?php } ?>
 </article>
 
 
