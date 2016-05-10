@@ -9,6 +9,9 @@
 
 $entry = get_query_var( 'entry' );
 $object_id = ( get_query_var( 'entry' ) !== '' ? $entry : 0 );
+
+// Check if the login failed
+$entry_status = ( get_query_var( 'status' ) === 'saved' ? true : false );
 ?>
 
 <article id="entry-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -19,6 +22,19 @@ $object_id = ( get_query_var( 'entry' ) !== '' ? $entry : 0 );
 	<?php #twentysixteen_post_thumbnail(); ?>
 
 	<div class="entry-content">
+		<?php if ( true === $entry_status ) : ?>
+	<section class="alert alert--message alert--positive alert--type box" role="alert">
+		<!--<a class="alert__close" href="#">×</a>-->
+		<p>
+		<?php printf(
+			'<strong>%1$s!</strong> %2$s</p>',
+			esc_html__( 'Saved', 'ctba-2016' ),
+			esc_html__( 'Your entry has been saved. Feel free to come back and edited it before submitting.', 'ctba-2016' )
+		); ?>
+		</p>
+
+	</section>
+<?php endif; ?>
 		<p>Please use the questions below as a guide and feel free to expand on these by providing supporting documents as you wish.</p>
 <?php
 
