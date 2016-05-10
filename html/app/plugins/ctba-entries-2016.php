@@ -63,6 +63,16 @@ function ctba_entries_2016_form() {
 	) );
 
 	$common->add_field( array(
+		'name'    => __( 'Company Address', 'ctba-entries-2016' ),
+		'id'      => $prefix .'company_address',
+		'type'    => 'textarea',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(
+		'required' => 'required',
+		),
+	) );
+
+	$common->add_field( array(
 		'name'    => __( 'Name of contact dealing with submission', 'ctba-entries-2016' ),
 		'id'      => $prefix . 'contact_name',
 		'type'    => 'text',
@@ -79,6 +89,17 @@ function ctba_entries_2016_form() {
 		'default' => 'ctba_entries_set_default',
 		'attributes'  => array(
 		'placeholder' => __( 'Contact Email', 'ctba-entries-2016' ),
+		),
+	) );
+
+	$common->add_field( array(
+		'name'    => __( 'Contact Telephone', 'ctba-entries-2016' ),
+		'id'      => $prefix . 'contact_phone',
+		'type'    => 'text',
+		'default' => 'ctba_entries_set_default',
+		'attributes'  => array(
+		'placeholder' => __( 'eg, 01212345678', 'ctba-entries-2016' ),
+		'required' => 'required',
 		),
 	) );
 
@@ -246,7 +267,7 @@ function ctba_entries_2016_form() {
 
 	$notforprofit->add_field( array(
 		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
-		'id' 							=> $prefix . 'notforprofit_details',
+		'id' 							=> $prefix . 'notforprofit_information',
 		'type'						=> 'textarea',
 		'default'					=> 'ctba_entries_set_default',
 		'attributes'			=> array(),
@@ -269,7 +290,7 @@ function ctba_entries_2016_form() {
 	) );
 
 	$community->add_field( array(
-		'name'						=> __( 'Please provide details of your organisation&rsquo;s corporate responsibility polict and outline your entitlemnet to be termed &lsquo;a good corporate citizen&rsquo;', 'ctba-entries-2016' ),
+		'name'						=> __( 'Please provide details of your organisation&rsquo;s corporate responsibility policy and outline your entitlemnet to be termed &lsquo;a good corporate citizen&rsquo;', 'ctba-entries-2016' ),
 		'id' 							=> $prefix . 'community_good',
 		'type'						=> 'textarea',
 		'default'					=> 'ctba_entries_set_default',
@@ -749,7 +770,7 @@ function ctba_entries_2016_form() {
 
 	$manufacturing->add_field( array(
 		'name'						=> __( 'Any further information you feel would support this entry', 'ctba-entries-2016' ),
-		'id' 							=> $prefix . 'manufacturing_challenges',
+		'id' 							=> $prefix . 'manufacturing_information',
 		'type'						=> 'textarea',
 		'default'					=> 'ctba_entries_set_default',
 		'attributes'			=> array(),
@@ -1868,9 +1889,10 @@ function ctba_entries_2016_form() {
 	) );
 
 	$additional->add_field( array(
-		'name' => __( 'By Submitting this entry, I certify that the particulars given are correct to the best of my knowledge and belief.', 'ctba-entries-2016' ),
-		'id'   => 'ctba_entries_2016_additional_submit',
-		'type' => 'checkbox',
+		'name'							=> __( 'Finalise Submission', 'ctba-entries-2016' ),
+		'description'				=> __( 'Please tick to finalise the submission of this entry and you have the and agree to the T&C&rsquo;s.', 'ctba-entries-2016' ),
+		'id'								=> 'ctba_entries_2016_additional_submit',
+		'type'							=> 'checkbox',
 	) );
 
 }
