@@ -138,8 +138,7 @@ function get_entry( $user_id ) {
  * Return entries status as string
  */
 function the_post_status() {
-
-	if ( 'published' === get_post_status( get_the_ID() ) ) {
+	if ( 'publish' === get_post_status( get_the_ID() ) ) {
 		esc_html_e( 'Submitted', 'ctba-2016' );
 	} else {
 		esc_html_e( 'Pending', 'ctba-2016' );
@@ -170,10 +169,11 @@ function get_entered_categories( ) {
 
 	$data = get_post_meta( get_the_ID(), 'ctba_entries_2016_categories', true );
 
-	foreach ( $data as $key ) {
-		array_push( $output, $categories[ $key ] );
+	if ( is_array( $data ) || is_object( $data ) ) {
+		foreach ( $data as $key ) {
+			array_push( $output, $categories[ $key ] );
+		}
 	}
-
 	return implode( ', ', $output );
 
 }
