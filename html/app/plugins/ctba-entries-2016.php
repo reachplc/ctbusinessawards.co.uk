@@ -1890,7 +1890,7 @@ function ctba_entries_2016_form() {
 
 	$additional->add_field( array(
 		'name'							=> __( 'Finalise Submission', 'ctba-entries-2016' ),
-		'description'				=> __( 'Please tick to finalise the submission of this entry and you have the and agree to the T&C&rsquo;s.', 'ctba-entries-2016' ),
+		'description'				=> __( 'Please tick to finalise the submission of this entry and you have agreed to the T&C&rsquo;s.', 'ctba-entries-2016' ),
 		'id'								=> 'ctba_entries_2016_additional_submit',
 		'type'							=> 'checkbox',
 	) );
