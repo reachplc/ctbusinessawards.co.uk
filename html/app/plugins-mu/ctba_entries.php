@@ -12,11 +12,8 @@ class CTBA_Entries {
 
 		add_action(
 			'after_setup_theme',
-			array(
-				$this,
-				'define_constants'
-				),
-		  1
+			array( $this, 'define_constants' ),
+			1
 		);
 
 		add_action(
@@ -52,7 +49,6 @@ class CTBA_Entries {
 			'query_vars',
 			array( $this, 'add_query_vars_filter' )
 		);
-
 
 	}
 
