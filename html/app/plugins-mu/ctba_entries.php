@@ -25,10 +25,27 @@ class CTBA_Entries {
 		);
 
 		add_action(
+			'init',
+			array( $this, 'add_caps_editor' )
+		);
+
+		add_action(
 			'map_meta_cap',
 			array( $this, 'entries_add_role_caps' ),
 			10,
 			4
+		);
+
+		add_action(
+			'manage_users_columns',
+			array( $this, 'update_users_columns' )
+		);
+
+		add_action(
+			'manage_users_custom_column',
+			array( $this, 'users_columns_add_entries' ),
+			10,
+			3
 		);
 
 		add_filter(
@@ -58,6 +75,17 @@ class CTBA_Entries {
 
 	public function enqueue_scripts() {
 
+	}
+
+	/**
+	 * Allow Editor role to view users list
+	 */
+	public function add_caps_editor() {
+		$role = get_role( 'editor' );
+		// Check if Editor has `list_users` capabilities.
+		if ( true !== $role->capabilities['list_users'] ) {
+			$role->add_cap( 'list_users' );
+		}
 	}
 
 	public function add_post_type() {
@@ -126,6 +154,36 @@ class CTBA_Entries {
 
 	public function print_footer_scripts() {
 
+	}
+
+	/**
+	 * Update manage user table columns
+	 */
+	public function update_users_columns( $column_headers ) {
+		unset( $column_headers['posts'] );
+		$column_headers['entries'] = __( 'Entries (Pending)', 'ctba_entries' );
+		return $column_headers;
+	}
+
+	public function users_columns_add_entries( $output, $column_name, $user_id ) {
+		if ( 'entries' === $column_name ) {
+			return sprintf(
+				'%1$s (%2$s)',
+				count_user_posts( $user_id , 'ctba-entries' ),
+				$this->get_users_pending_posts( $user_id )
+			);
+		}
+		return $output;
+	}
+
+	public function get_users_pending_posts( $user_id ) {
+		$args = array(
+			'author'	=> $user_id,
+			'post_type'	=> 'ctba-entries',
+			'post_status'	=> 'pending',
+		);
+		$myquery = new WP_Query( $args );
+		return $myquery->found_posts;
 	}
 
 	public function entries_add_role_caps( $caps, $cap, $user_id, $args ){
