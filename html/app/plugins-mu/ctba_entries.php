@@ -157,11 +157,16 @@ class CTBA_Entries {
 	 */
 	public function update_users_columns( $column_headers ) {
 		unset( $column_headers['posts'] );
+		$column_headers['telephone'] = __( 'Telephone', 'ctba_entries' );
 		$column_headers['entries'] = __( 'Entries (Pending)', 'ctba_entries' );
 		return $column_headers;
 	}
 
+	/**
+	 * Add content to custom columns
+	 */
 	public function users_columns_add_entries( $output, $column_name, $user_id ) {
+
 		if ( 'entries' === $column_name ) {
 			return sprintf(
 				'%1$s (%2$s)',
@@ -169,9 +174,18 @@ class CTBA_Entries {
 				$this->get_users_pending_posts( $user_id )
 			);
 		}
+
+		if ( 'telephone' === $column_name ) {
+			return $this->get_users_telephone( $user_id );
+		}
+
 		return $output;
+
 	}
 
+	/**
+	 * Get count of pending entries
+	 */
 	public function get_users_pending_posts( $user_id ) {
 		$args = array(
 			'author'	=> $user_id,
@@ -180,6 +194,28 @@ class CTBA_Entries {
 		);
 		$myquery = new WP_Query( $args );
 		return $myquery->found_posts;
+	}
+
+	/**
+	 * Get users telephone from most recent entry.
+	 */
+	public function get_users_telephone( $user_id ) {
+		$args = array(
+			'author'	=> $user_id,
+			'post_type'	=> 'ctba-entries',
+			'post_status'	=> array( 'pending', 'publish' ),
+			'orderby'	=> 'DATETIME',
+			'order'	=> 'DESC',
+			'posts_per_page'	=> 1,
+		);
+		$myquery = new WP_Query( $args );
+
+		if ( ! empty( $myquery->post ) ) {
+			return get_post_meta( $myquery->post->ID, '_ctba_entries_2016_contact_phone', true );
+		}
+
+		return false;
+
 	}
 
 	public function entries_add_role_caps( $caps, $cap, $user_id, $args ){
