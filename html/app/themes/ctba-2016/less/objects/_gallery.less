@@ -1,118 +1,74 @@
 /**
- * Gallery
- * Example:
-      <ul class="gallery"">
-        <li class="gallery__item">
+ * Gallery Object
+ * @example:
+      <ul class="o-gallery"">
+        <li class="o-gallery__item">
           <img src="example.jpg" alt="">
         </li>
       </ul>
  *
  */
-
-.gallery {
-  width: 100%;
+.o-gallery {
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex-basis: auto;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
-
-  .gallery--header {
-    margin-bottom: 29px;
-  }
-
-  .gallery__item {
-    float: left;
-    display: block;
-    margin-bottom: 29px;
-    padding-left: 14.5px;
-    padding-right: 14.5px;
-    width: 50%;
-  }
-
-//  Remove left padding for right items
-  .gallery__item:nth-child(2n+1) {
-    padding-left: 0;
-  }
-
-//  Remove right padding for left items
-  .gallery__item:nth-child(2n+2) {
-    padding-right: 0;
-  }
-
-  .gallery__item img {
-    max-width: 100%;
-  }
-
-//  Fixes SVG scale bug in IE9+
-
-  .gallery__item img[src$=".svg"] {
-    height: initial;
-  }
-
-  .lt-ie9 .gallery--image img {
-    width: 100%;
-  }
-
-@media screen and (min-width: 481px) {
-
-  .gallery__item {
-    width: 247px;
-    width: 34.7398%;
-  }
-
- //  Reset left padding for right items
-  .gallery__item:nth-child(2n+1) {
-    padding-left: 14.5px;
-  }
-
-  //  Reset right padding for left items
-  .gallery__item:nth-child(2n+2) {
-    padding-right: 14.5px;
-  }
-
-  //  Remove left padding for right items
-  .gallery__item:nth-child(3n+1) {
-    padding-left: 0px;
-    width: 232px;
-    width: 32.63009%;
-  }
-
-  //  Remove right padding for left items
-  .gallery__item:nth-child(3n+3) {
-    padding-right: 0;
-    width: 232px;
-    width: 32.63009%;
-  }
-
+.o-gallery__item {
+	box-sizing: border-box;
+	flex: auto;
+	padding-right: 14.5px;
+	padding-left: 14.5px;
+	// Display items in a 2 column layout
+	width: 50%;
+	max-width: 50%;
 }
-
-@media screen and (min-width: 769px) {
-
-  .gallery__item {
-    width: 26.07033%;
-    min-height: 107px;
-  }
-
-  //  Reset left padding for right items
-  .gallery__item:nth-child(3n+1) {
-    padding-left: 14.5px;
-    width: 26.07033%;
-  }
-
-  //  Reset right padding for left items
-  .gallery__item:nth-child(3n+3) {
-    padding-right: 14.5px;
-    width: 26.07033%;
-
-  }
-
-  //  Remove left padding for right items
-  .gallery__item:nth-child(4n+1) {
-    padding-left: 0;
-    width: 23.77675%;
-  }
-
-  //  Remove right padding for left items
-  .gallery__item:nth-child(4n+4) {
-    padding-right: 0;
-    width: 23.77675%;
-  }
-
+@media (max-width: 480px) {
+	// Remove left padding for right items.
+	.o-gallery__item:nth-child(2n+1) {
+		padding-left: 0;
+	}
+	// Remove right padding for left items.
+	.o-gallery__item:nth-child(2n+2) {
+		padding-right: 0;
+	}
+}
+@media (min-width: 481px) {
+	.o-gallery__item {
+		// Display items in a 3 column layout
+		width: 33.333%;
+		max-width: 33.333%;
+	}
+}
+@media (min-width: 481px) and (max-width: 710px) {
+	// Remove left padding for right items
+	.o-gallery__item:nth-child(3n+1) {
+		padding-left: 0;
+	}
+	// Remove right padding for left items
+	.o-gallery__item:nth-child(3n+3) {
+		padding-right: 0;
+	}
+}
+@media screen and (min-width: 711px) {
+	.o-gallery__item {
+		// Display items in a 4 column layout
+		width: 25%;
+		max-width: 25%;
+	}
+	// Remove left padding for right items
+	.o-gallery__item:nth-child(4n+1) {
+		padding-left: 0;
+	}
+	// Remove right padding for left items
+	.o-gallery__item:nth-child(4n+4) {
+		padding-right: 0;
+	}
+}
+.o-gallery__item img {
+	max-width: 100%;
 }

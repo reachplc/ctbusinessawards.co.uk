@@ -164,8 +164,8 @@ function ctba_define_media_sizes() {
 	// Main Logo
 	add_image_size( 'logo-master', 528, 328, false );
 
-	// Partner Logo
-	add_image_size( 'logo-partner', 400, 300, false );
+	// Partner Logo.
+	add_image_size( 'logo-partner', 400, 150, false );
 
 	// Judge profile image
 	add_image_size( 'profile-judge', 480, 600, array( 'center', 'top' ) );
