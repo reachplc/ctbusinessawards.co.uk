@@ -9,7 +9,7 @@
 
 $associate_array = new WP_Query(
 	array(
-		'post_type'		=> 'tm-events-partners',
+		'post_type'		=> 'ctba-partners',
 		'post_status' => array(
 			'publish',
 		),
@@ -28,7 +28,7 @@ $associate_array = new WP_Query(
 
 $supporter_array = new WP_Query(
 	array(
-		'post_type'		=> 'tm-events-partners',
+		'post_type'		=> 'ctba-partners',
 		'post_status' => array(
 			'publish',
 		),
