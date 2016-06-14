@@ -1,29 +1,38 @@
 /**
  * Gallery Object
  * @example:
-      <ul class="o-gallery"">
-        <li class="o-gallery__item">
-          <img src="example.jpg" alt="">
-        </li>
-      </ul>
+			<ul class="o-gallery"">
+				<li class="o-gallery__item">
+					<img src="example.jpg" alt="">
+				</li>
+			</ul>
  *
  */
 .o-gallery {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	display: -webkit-flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	flex-basis: auto;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+			flex-direction: row;
+	-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+	-ms-flex-preferred-size: auto;
+			flex-basis: auto;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 .o-gallery__item {
 	box-sizing: border-box;
-	flex: auto;
+	-webkit-box-flex: 1;
+	-ms-flex: auto;
+			flex: auto;
 	padding-right: 14.5px;
 	padding-left: 14.5px;
-	// Display items in a 2 column layout
+	/* Display items in a 2 column layout*/
 	width: 50%;
 	max-width: 50%;
 }
