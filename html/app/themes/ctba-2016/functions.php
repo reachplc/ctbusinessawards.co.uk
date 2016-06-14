@@ -137,9 +137,9 @@ add_action( 'widgets_init', 'ctba_2016_widgets_init' );
  */
 function ctba_2016_scripts() {
 
-	wp_enqueue_style( 'ctba-2016-fonts', '//fast.fonts.net/cssapi/2896c3ef-2b78-4bc2-9652-3329e9098a71.css', array(), '1.0.0', 'all' );
+	wp_enqueue_style( 'ctba-2016-fonts', '//fast.fonts.net/cssapi/2896c3ef-2b78-4bc2-9652-3329e9098a71.css', array(), '1.1.0', 'all' );
 
-	wp_enqueue_style( 'ctba-2016-style', get_stylesheet_uri(), array( 'ctba-2016-fonts' ), '1.0.0' );
+	wp_enqueue_style( 'ctba-2016-style', get_stylesheet_uri(), array( 'ctba-2016-fonts' ), '1.1.0' );
 
 	wp_enqueue_script( 'ctba-2016-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
