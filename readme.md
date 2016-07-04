@@ -50,7 +50,7 @@ Visit [http://www.ctbusinessawards.dev](http://www.ctbusinessawards.dev/) to vie
 
 Vagrant's MySQL database can be accessed through SSH using the following credentials:
 
-- SSH Host: 192.168.33.100
+- SSH Host: ctbusinessawards.co.uk
 - SSH User: vagrant
 - SSH Password: vagrant
 - MySQL Host: 127.0.0.1
