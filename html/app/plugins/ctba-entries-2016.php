@@ -2045,3 +2045,37 @@ function ctba_cntries_2016_handle_frontend_post_form_submission() {
 }
 
 add_action( 'cmb2_after_init', 'ctba_cntries_2016_handle_frontend_post_form_submission' );
+
+
+/**
+ * Export Entires
+ */
+add_action(
+	'admin_menu',
+	'ctba_entries_2016_export_page'
+);
+
+/**
+ * Create export page
+ */
+function ctba_entries_2016_export_page() {
+	add_submenu_page(
+		'edit.php?post_type=ctba-entries',
+		__( 'Export Entires', 'ctba-entries-2016' ),
+		__( 'Export', 'ctba-entries-2016' ),
+		'edit_pages',
+		'ctba-entries-export',
+		'ctba_entries_2016_export_page_content'
+	);
+}
+
+/**
+ * Export page content
+ */
+function ctba_entries_2016_export_page_content() {
+
+	printf( '<h1>%1$s</h1>', esc_html( get_admin_page_title() ) );
+
+	esc_html_e( 'Export entries feature description.', 'ctba-entries-2016' );
+
+}
