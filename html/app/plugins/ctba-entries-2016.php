@@ -11,19 +11,6 @@
  * @package ctba_entries_2016
  */
 
-/**
- * Add custom query variable for failed logins.
- *
- * @param array $vars Currenly set query vars.
- */
-function ctba_entries_add_query_vars( $vars ) {
-	print_r($vars);
-	$vars[] = 'post';
-	return $vars;
-}
-
-add_filter( 'query_vars', 'ctba_entries_add_query_vars' );
-
 function ctba_entries_set_title( $field_args, $field ) {
 	$entry = get_query_var( 'entry' );
 	$value = get_the_title( $entry );
@@ -2088,7 +2075,8 @@ function ctba_entries_2016_export_page() {
  * Export page content
  */
 function ctba_entries_2016_export_page_content() {
-	$entry = $_GET['post'];
+	$entry = intval( $_GET['entry'] );
+	var_dump( $entry );
 	printf( '<h1>%1$s</h1>', esc_html( get_admin_page_title() ) );
 
 	if ( empty( $entry ) ) {
@@ -2098,20 +2086,21 @@ function ctba_entries_2016_export_page_content() {
 
 		// Get categories to display.
 		$has_categories = cmb2_get_field_value( '_ctba_entries_2016_common', 'ctba_entries_2016_categories', $entry );
-
-		// Common Questions.
-		printf( '<h2>%1$s</h2>', esc_html__( 'Common Questions', 'ctba-entries' ) );
 		$common = wp_list_pluck( cmb2_get_metabox( '_ctba_entries_2016_common' )->prop( 'fields' ), $entry );
-		foreach ( $common as $field_id => $content ) {
-			if ( 'ctba_entries_2016_categories' !== $field_id ) {
-				$field = cmb2_get_field( '_ctba_entries_2016_common', $field_id, $entry );
-				printf( '<h3>%1$s</h3>', esc_html( $field->args['name'] ) );
-					ctba_entries_2016_get_value( '_ctba_entries_2016_common', $field->args, $field_id );
-			}
-		}
-
 		// Loop throught each category including common questions and misc for each.
 		foreach ( $has_categories as $cat_id => $metabox ) {
+
+			// Common Questions.
+			printf( '<h2>%1$s</h2>', esc_html__( 'Common Questions', 'ctba-entries' ) );
+			foreach ( $common as $common_id => $content ) {
+				if ( 'ctba_entries_2016_categories' !== $common_id ) {
+					$common_content = cmb2_get_field( '_ctba_entries_2016_common', $common_id, $entry );
+					printf( '<h3>%1$s</h3>', esc_html( $common_content->args['name'] ) );
+						ctba_entries_2016_get_value( '_ctba_entries_2016_common', $common_content->args, $common_id );
+				}
+			}
+
+			// Categories
 			$title = wp_list_pluck( cmb2_get_metabox( $metabox )->prop( 'title' ), $entry );
 			$field_ids = wp_list_pluck( cmb2_get_metabox( $metabox )->prop( 'fields' ), $entry );
 			printf( '<h2>%1$s</h2>', esc_html( $title ) );
@@ -2151,7 +2140,7 @@ function ctba_entries_2016_export_link() {
 		array(
 			'post_type' => 'ctba-entries',
 			'page'	=> 'ctba-entries-export',
-			'post' => get_the_ID(),
+			'entry' => get_the_ID(),
 		),
 		admin_url(
 			'edit.php'
