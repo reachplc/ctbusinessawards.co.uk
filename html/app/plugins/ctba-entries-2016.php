@@ -7,9 +7,11 @@
  * Author:      Michael Bragg
  * Author URI:  http://www.trinitymirror.com
  * Text Domain: ctba-entries-2016
+ *
+ * @package ctba_entries_2016
  */
 
-function ctba_entries_set_title( $field_args, $field ){
+function ctba_entries_set_title( $field_args, $field ) {
 	$entry = get_query_var( 'entry' );
 	$value = get_the_title( $entry );
 	return $value;
@@ -2045,3 +2047,111 @@ function ctba_cntries_2016_handle_frontend_post_form_submission() {
 }
 
 add_action( 'cmb2_after_init', 'ctba_cntries_2016_handle_frontend_post_form_submission' );
+
+
+/**
+ * Export Entires
+ */
+add_action(
+	'admin_menu',
+	'ctba_entries_2016_export_page'
+);
+
+/**
+ * Create export page
+ */
+function ctba_entries_2016_export_page() {
+	add_submenu_page(
+		'edit.php?post_type=ctba-entries',
+		__( 'Export Entires', 'ctba-entries-2016' ),
+		__( 'Export', 'ctba-entries-2016' ),
+		'edit_pages',
+		'ctba-entries-export',
+		'ctba_entries_2016_export_page_content'
+	);
+}
+
+/**
+ * Export page content
+ */
+function ctba_entries_2016_export_page_content() {
+	$entry = intval( $_GET['entry'] );
+	var_dump( $entry );
+	printf( '<h1>%1$s</h1>', esc_html( get_admin_page_title() ) );
+
+	if ( empty( $entry ) ) {
+		esc_html_e( 'Chose an entry to export from the Entries page.', 'ctba-entries-2016' );
+	} else {
+		esc_html_e( 'Export entries feature description.', 'ctba-entries-2016' );
+
+		// Get categories to display.
+		$has_categories = cmb2_get_field_value( '_ctba_entries_2016_common', 'ctba_entries_2016_categories', $entry );
+		$common = wp_list_pluck( cmb2_get_metabox( '_ctba_entries_2016_common' )->prop( 'fields' ), $entry );
+		// Loop throught each category including common questions and misc for each.
+		foreach ( $has_categories as $cat_id => $metabox ) {
+
+			// Common Questions.
+			printf( '<h2>%1$s</h2>', esc_html__( 'Common Questions', 'ctba-entries' ) );
+			foreach ( $common as $common_id => $content ) {
+				if ( 'ctba_entries_2016_categories' !== $common_id ) {
+					$common_content = cmb2_get_field( '_ctba_entries_2016_common', $common_id, $entry );
+					printf( '<h3>%1$s</h3>', esc_html( $common_content->args['name'] ) );
+						ctba_entries_2016_get_value( '_ctba_entries_2016_common', $common_content->args, $common_id );
+				}
+			}
+
+			// Categories
+			$title = wp_list_pluck( cmb2_get_metabox( $metabox )->prop( 'title' ), $entry );
+			$field_ids = wp_list_pluck( cmb2_get_metabox( $metabox )->prop( 'fields' ), $entry );
+			printf( '<h2>%1$s</h2>', esc_html( $title ) );
+			foreach ( $field_ids as $field_id => $content ) {
+				$field = cmb2_get_field( $metabox, $field_id, $entry );
+				printf( '<h3>%1$s</h3>', esc_html( $field->args['name'] ) );
+				ctba_entries_2016_get_value( $metabox, $field->args, $field_id );
+			}
+		}
+	}
+}
+
+/**
+ * Get value of cmb2 field
+ *
+ * @param  [type] $metabox  [description]
+ * @param  [type] $field    [description]
+ * @param  [type] $field_id [description]
+ * @return [type]           [description]
+ */
+function ctba_entries_2016_get_value( $metabox, $field, $field_id ) {
+	switch ( $field['type'] ) {
+		case 'multicheck':
+			break;
+		default:
+			echo wpautop( cmb2_get_field_value( $metabox, $field_id ) );
+			break;
+	}
+}
+
+
+/**
+ * Add link to admin misc actions metabox
+ */
+function ctba_entries_2016_export_link() {
+	$link = add_query_arg(
+		array(
+			'post_type' => 'ctba-entries',
+			'page'	=> 'ctba-entries-export',
+			'entry' => get_the_ID(),
+		),
+		admin_url(
+			'edit.php'
+		)
+	);
+
+	?>
+	<div class="misc-pub-section curtime misc-pub-curtime">
+	<span class="dashicons dashicons-download"></span><span id="export">Export entry:</span>
+	<a href="<?php echo esc_url( $link ); ?>"><span aria-hidden="true">Print</span> <span class="screen-reader-text">Print this entry</span></a>
+</div>
+<?php }
+
+add_action( 'post_submitbox_misc_actions', 'ctba_entries_2016_export_link' );
