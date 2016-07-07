@@ -2072,6 +2072,18 @@ function ctba_entries_2016_export_page() {
 }
 
 /**
+ * Add custom style sheet for export page
+ */
+
+function ctba_entries_2016_enqueue_style( $hook ) {
+	if ( 'ctba-entries_page_ctba-entries-export' != $hook ) {
+		return;
+	}
+	wp_add_inline_style( 'wp-admin', ctba_entries_2016_export_styles() );
+}
+add_action( 'admin_enqueue_scripts', 'ctba_entries_2016_enqueue_style' );
+
+/**
  * Export page content
  */
 function ctba_entries_2016_export_page_content() {
@@ -2181,4 +2193,15 @@ function get_meta_box_title() {
 		'_ctba_entries_2016_additional' => 'Additional Information',
 	);
 	return $array;
+}
+
+function ctba_entries_2016_export_styles() {
+
+	$output  = '@media print {';
+	$output .= '#adminmenuback { display: none; }';
+	$output .= '#adminmenuwrap { display: none; }';
+	$output .= '}';
+
+	return $output;
+
 }
