@@ -2076,9 +2076,7 @@ function ctba_entries_2016_export_page() {
  */
 function ctba_entries_2016_export_page_content() {
 	$entry = intval( $_GET['entry'] );
-	var_dump( $entry );
 	printf( '<h1>%1$s</h1>', esc_html( get_admin_page_title() ) );
-
 	if ( empty( $entry ) ) {
 		esc_html_e( 'Chose an entry to export from the Entries page.', 'ctba-entries-2016' );
 	} else {
@@ -2096,14 +2094,13 @@ function ctba_entries_2016_export_page_content() {
 				if ( 'ctba_entries_2016_categories' !== $common_id ) {
 					$common_content = cmb2_get_field( '_ctba_entries_2016_common', $common_id, $entry );
 					printf( '<h3>%1$s</h3>', esc_html( $common_content->args['name'] ) );
-						ctba_entries_2016_get_value( '_ctba_entries_2016_common', $common_content->args, $common_id );
+					ctba_entries_2016_get_value( '_ctba_entries_2016_common', $common_content->args, $common_id );
 				}
 			}
 
-			// Categories
-			$title = wp_list_pluck( cmb2_get_metabox( $metabox )->prop( 'title' ), $entry );
+			// Categories.
 			$field_ids = wp_list_pluck( cmb2_get_metabox( $metabox )->prop( 'fields' ), $entry );
-			printf( '<h2>%1$s</h2>', esc_html( $title ) );
+			printf( '<h2>%1$s</h2>', esc_html( get_meta_box_title()[ $metabox ] ) );
 			foreach ( $field_ids as $field_id => $content ) {
 				$field = cmb2_get_field( $metabox, $field_id, $entry );
 				printf( '<h3>%1$s</h3>', esc_html( $field->args['name'] ) );
@@ -2155,3 +2152,33 @@ function ctba_entries_2016_export_link() {
 <?php }
 
 add_action( 'post_submitbox_misc_actions', 'ctba_entries_2016_export_link' );
+
+/**
+ * Return category titles
+ *
+ * @return array Key/Value of catgegory ID / Title.
+ */
+function get_meta_box_title() {
+	/**
+	 * This is the metabox id, and array of options to be used in styling the metabox
+	 * Add metabox to be outputted must be listed here.
+	 */
+	$array = array(
+		'_ctba_entries_2016_common' => 'Common Questions',
+		'_ctba_entries_2016_notforprofit' => 'Not-for-profit Organisation',
+		'_ctba_entries_2016_community' => 'Contribution to the Community',
+		'_ctba_entries_2016_trade' => 'International Trade',
+		'_ctba_entries_2016_creative' => 'Creative Industries Business of the Year',
+		'_ctba_entries_2016_retail' => 'Retail Business of the Year',
+		'_ctba_entries_2016_technology' => 'Excellence in Science and Technology',
+		'_ctba_entries_2016_manufacturing' => 'Excellence in Manufacturing',
+		'_ctba_entries_2016_marketing' => 'Sales and Marketing',
+		'_ctba_entries_2016_services' => 'Services',
+		'_ctba_entries_2016_entrepreneur' => 'Business Entrepreneur of the Year',
+		'_ctba_entries_2016_newbusiness' => 'New Business of the Year',
+		'_ctba_entries_2016_smallbusiness' => 'Small Business of the Year',
+		'_ctba_entries_2016_companyyear' => 'Company of the Year',
+		'_ctba_entries_2016_additional' => 'Additional Information',
+	);
+	return $array;
+}
