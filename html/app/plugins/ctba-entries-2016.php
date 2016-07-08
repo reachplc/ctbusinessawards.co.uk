@@ -2231,7 +2231,7 @@ function ctba_entries_2016_export_styles() {
 	$output .= '.gamma { margin-bottom: 0.5em; font-size: 1.414rm; font-weight: bold; }';
 
 	// Front Cover.
-	$output .= '.frontcover { page: cover; width: 100%; height: 100%; page-break-after: always; page-break-before: always; }';
+	$output .= '.frontcover { position: relative; page-break-after: always; page-break-before: always; }';
 
 	// Format categories.
 	$output .= '.category { margin-bottom: 1em; }';
