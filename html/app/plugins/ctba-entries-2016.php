@@ -2088,36 +2088,47 @@ add_action( 'admin_enqueue_scripts', 'ctba_entries_2016_enqueue_style' );
  */
 function ctba_entries_2016_export_page_content() {
 	$entry = intval( $_GET['entry'] );
-	printf( '<h1>%1$s</h1>', esc_html( get_admin_page_title() ) );
+	printf( '<h1 class="page-heading">%1$s</h1>', esc_html( get_admin_page_title() ) );
 	if ( empty( $entry ) ) {
-		esc_html_e( 'Chose an entry to export from the Entries page.', 'ctba-entries-2016' );
+		echo '<p class="description">' . esc_html__( 'Chose an entry to export from the Entries page.', 'ctba-entries-2016' ) . '</p>';
 	} else {
-		esc_html_e( 'Export entries feature description.', 'ctba-entries-2016' );
+		echo '<p class="description">' . esc_html__( 'Export entries feature description.', 'ctba-entries-2016' ) . '</p>';
 
 		// Get categories to display.
 		$has_categories = cmb2_get_field_value( '_ctba_entries_2016_common', 'ctba_entries_2016_categories', $entry );
 		$common = wp_list_pluck( cmb2_get_metabox( '_ctba_entries_2016_common' )->prop( 'fields' ), $entry );
 		// Loop throught each category including common questions and misc for each.
 		foreach ( $has_categories as $cat_id => $metabox ) {
+			$field_ids = wp_list_pluck( cmb2_get_metabox( $metabox )->prop( 'fields' ), $entry );
 
+			echo '<div class="frontcover">';
+			echo '<h1 class="alpha">CT Business Awards Entry for ' . get_the_title( $entry ) . '</h1>';
+			echo '<p class="beta">Category: '. get_meta_box_title()[ $metabox ] . '</p>';
+			echo '</div>';
 			// Common Questions.
-			printf( '<h2>%1$s</h2>', esc_html__( 'Common Questions', 'ctba-entries' ) );
+			echo '<section  class="category common">';
+			printf( '<h2 class="beta">%1$s</h2>', esc_html__( 'Common Questions', 'ctba-entries' ) );
 			foreach ( $common as $common_id => $content ) {
 				if ( 'ctba_entries_2016_categories' !== $common_id ) {
+					echo '<div class="question">';
 					$common_content = cmb2_get_field( '_ctba_entries_2016_common', $common_id, $entry );
 					printf( '<h3>%1$s</h3>', esc_html( $common_content->args['name'] ) );
 					ctba_entries_2016_get_value( '_ctba_entries_2016_common', $common_content->args, $common_id );
+					echo '</div>';
 				}
+			echo '</section>';
 			}
-
+			echo '<section class="category">';
 			// Categories.
-			$field_ids = wp_list_pluck( cmb2_get_metabox( $metabox )->prop( 'fields' ), $entry );
-			printf( '<h2>%1$s</h2>', esc_html( get_meta_box_title()[ $metabox ] ) );
+			printf( '<h2 class="beta">%1$s</h2>', esc_html( get_meta_box_title()[ $metabox ] ) );
 			foreach ( $field_ids as $field_id => $content ) {
+				echo '<div class="question">';
 				$field = cmb2_get_field( $metabox, $field_id, $entry );
-				printf( '<h3>%1$s</h3>', esc_html( $field->args['name'] ) );
+				printf( '<h3 class="gamma">%1$s</h3>', esc_html( $field->args['name'] ) );
 				ctba_entries_2016_get_value( $metabox, $field->args, $field_id );
+				echo '</div>';
 			}
+			echo '</section>';
 		}
 	}
 }
@@ -2197,9 +2208,37 @@ function get_meta_box_title() {
 
 function ctba_entries_2016_export_styles() {
 
-	$output  = '@media print {';
+	$output  = '@page { size: A4 portrait; margin: 10mm; @bottom-center { content: counter(page); } }';
+	$output .= '@page :first {  }';
+	$output .= '@media print {';
+
+	// Hide WP Admin menus.
 	$output .= '#adminmenuback { display: none; }';
 	$output .= '#adminmenuwrap { display: none; }';
+
+	// Hide page title and instructions.
+	$output .= '.page-heading { display: none; }';
+	$output .= '.description { display: none; }';
+
+	// Reset main content width.
+	$output .= '#wpcontent, #wpfooter {  margin-left: 0;}';
+
+	// Typographic styles.
+	$output .= 'body { font-size: 12pt; line-height: 1.6em; colour: rgb(51,51,51); }';
+	$output .= '.alpha { margin-bottom: 1em; font-size: 2.827em; line-height: 1.1em;}';
+	$output .= '.beta, .gamma { page-break-after: avoid; }';
+	$output .= '.beta { margin-bottom: 0.5em; font-size: 1.999em; font-weight: bold; }';
+	$output .= '.gamma { margin-bottom: 0.5em; font-size: 1.414rm; font-weight: bold; }';
+
+	// Front Cover.
+	$output .= '.frontcover { page: cover; width: 100%; height: 100%; page-break-after: always; page-break-before: always; }';
+
+	// Format categories.
+	$output .= '.category { margin-bottom: 1em; }';
+
+	// Format questions.
+	$output .= '.question { margin-bottom: 2em; padding-bottom: 1em; border-bottom: 1pt solid rgba(0,0,0,0.3); page-break-inside: avoid; }';
+
 	$output .= '}';
 
 	return $output;
