@@ -2100,10 +2100,10 @@ function ctba_entries_2016_export_page_content() {
 		// Loop throught each category including common questions and misc for each.
 		foreach ( $has_categories as $cat_id => $metabox ) {
 			$field_ids = wp_list_pluck( cmb2_get_metabox( $metabox )->prop( 'fields' ), $entry );
-
+			echo '<div class="entry">';
 			echo '<div class="frontcover">';
-			echo '<h1 class="alpha">CT Business Awards Entry for ' . get_the_title( $entry ) . '</h1>';
-			echo '<p class="beta">Category: '. get_meta_box_title()[ $metabox ] . '</p>';
+			echo '<h1 class="alpha">CT Business Awards<br>Entry for ' . get_the_title( $entry ) . '</h1>';
+			echo '<p class="beta">'. get_meta_box_title()[ $metabox ] . '</p>';
 			echo '</div>';
 			// Common Questions.
 			echo '<section  class="category common">';
@@ -2116,8 +2116,9 @@ function ctba_entries_2016_export_page_content() {
 					ctba_entries_2016_get_value( '_ctba_entries_2016_common', $common_content->args, $common_id );
 					echo '</div>';
 				}
-			echo '</section>';
 			}
+			echo '</section>';
+
 			echo '<section class="category">';
 			// Categories.
 			printf( '<h2 class="beta">%1$s</h2>', esc_html( get_meta_box_title()[ $metabox ] ) );
@@ -2129,6 +2130,7 @@ function ctba_entries_2016_export_page_content() {
 				echo '</div>';
 			}
 			echo '</section>';
+			echo '</div>';
 		}
 	}
 }
@@ -2206,11 +2208,16 @@ function get_meta_box_title() {
 	return $array;
 }
 
+/**
+ * Print styling for entry forms
+ */
 function ctba_entries_2016_export_styles() {
 
 	$output  = '@page { size: A4 portrait; margin: 10mm; @bottom-center { content: counter(page); } }';
-	$output .= '@page :first {  }';
 	$output .= '@media print {';
+
+	// Hack for Chrome to support page breaks.
+	$output .= 'html, body, #wpwrap, #wpcontent, #wpbody, #wpbody-content { float: none; }';
 
 	// Hide WP Admin menus.
 	$output .= '#adminmenuback { display: none; }';
@@ -2221,7 +2228,8 @@ function ctba_entries_2016_export_styles() {
 	$output .= '.description { display: none; }';
 
 	// Reset main content width.
-	$output .= '#wpcontent, #wpfooter {  margin-left: 0;}';
+	$output .= '#wpcontent, #wpfooter {  margin-left: 0; }';
+	$output .= '#wpfooter { display: none; }';
 
 	// Typographic styles.
 	$output .= 'body { font-size: 12pt; line-height: 1.6em; colour: rgb(51,51,51); }';
@@ -2231,7 +2239,10 @@ function ctba_entries_2016_export_styles() {
 	$output .= '.gamma { margin-bottom: 0.5em; font-size: 1.414rm; font-weight: bold; }';
 
 	// Front Cover.
-	$output .= '.frontcover { position: relative; page-break-after: always; page-break-before: always; }';
+	$output .= '.frontcover { margin-bottom: 1em; }';
+
+	$output .= '.entry { position: relative; display: block; page-break-after: always; }';
+	$output .= '.entry:last-of-type { page-break-after: auto; }';
 
 	// Format categories.
 	$output .= '.category { margin-bottom: 1em; }';
