@@ -2109,7 +2109,7 @@ function ctba_entries_2016_export_page_content() {
 			echo '<section  class="category common">';
 			printf( '<h2 class="beta">%1$s</h2>', esc_html__( 'Common Questions', 'ctba-entries' ) );
 			foreach ( $common as $common_id => $content ) {
-				if ( 'ctba_entries_2016_categories' !== $common_id || 'submitted_post_title' !== $common_id ) {
+				if ( 'ctba_entries_2016_categories' !== $common_id && 'submitted_post_title' !== $common_id ) {
 					echo '<div class="question">';
 					$common_content = cmb2_get_field( '_ctba_entries_2016_common', $common_id, $entry );
 					printf( '<h3>%1$s</h3>', esc_html( $common_content->args['name'] ) );
