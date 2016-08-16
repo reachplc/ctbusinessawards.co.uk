@@ -5,6 +5,9 @@ if ( is_user_logged_in() ) {
 	exit;
 }
 
+/** @TODO: Refactor to Site Settings Option. */
+$nomination_status = false;
+
 // Check if the login failed
 $login_status = ( get_query_var( 'status' ) === 'failed' ? true : false );
 
@@ -17,15 +20,27 @@ get_header(); ?>
 				<article class="ss1-ss4 ms1-ms6 ls1-ls12 module login-form">
 
 				<?php the_title( '<h1 class="gamma heading--main page-title">', '</h1>' ); ?>
+				<?php if( $nomination_status ):?>
+					<p>
+					<?php printf(
+						'%1$s <a href="%2$s">%3$s</a>.',
+						esc_html__( 'Not got an account?', 'ctba-2016' ),
+						esc_url( home_url( 'register/' ) ),
+						esc_html__( 'Click here to register', 'ctba-2016' )
+					); ?>
+					</p>
+				<?php else: ?>
+					<section class="alert alert--message alert--info alert--type box" role="alert">
+						<p>
+						<?php printf(
+							'<strong>%1$s</strong> %2$s</p>',
+							esc_html__( 'Info', 'ctba-2016' ),
+							esc_html__( 'Registration for this year&rsquo;s awards have closed.', 'ctba-2016' )
+						); ?>
+						</p>
+					</section>
+				<?php endif;?>
 
-				<p>
-				<?php printf(
-					'%1$s <a href="%2$s">%3$s</a>.',
-					esc_html__( 'Not got an account?', 'ctba-2016' ),
-					esc_url( home_url( 'register/' ) ),
-					esc_html__( 'Click here to register', 'ctba-2016' )
-				); ?>
-				</p>
 
 				<?php if ( true === $login_status ) : ?>
 					<section class="alert alert--message alert--warning alert--type box" role="alert">
