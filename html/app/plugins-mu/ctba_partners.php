@@ -108,7 +108,7 @@ class CTBA_Partners {
 			'rewrite'								=> array(
 				'slug' => 'partners',
 				'with_front' => false,
-				'pages' => false,
+				'pages' => true,
 			),
 			'exclude_from_search'   => false,
 			'publicly_queryable'    => true,
