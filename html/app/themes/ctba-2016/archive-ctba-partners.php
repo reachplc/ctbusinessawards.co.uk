@@ -54,6 +54,9 @@ get_header(); ?>
 
 			<?php endwhile; ?>
 			</ul>
+
+			<?php the_posts_navigation( array( 'prev_text' => __( 'Previous Partners', 'ctba-2016' ), 'next_text' => __( 'Next Partners', 'ctba-2016' ), 'screen_reader_text' => __( 'Partners navigation', 'ctba-2016' ) ) ); ?>
+
 	<?php else : ?>
 
 		<?php get_template_part( 'content-parts/content', 'none' ); ?>
