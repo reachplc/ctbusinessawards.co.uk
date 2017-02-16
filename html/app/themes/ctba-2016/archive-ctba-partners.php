@@ -25,7 +25,7 @@ get_header(); ?>
 				<p>For more information regarding sponsorship opportunities, call Michelle Gardiner on <a href="tel:08453313031">08453 31 30 31</a> / <a href="tel:07791122627">07791 122 627</a> or email <a href="mailto:mgardiner@championsukplc.com">mgardiner@championsukplc.com</a>.</p>
 			</header><!-- .page-header -->
 
-  <ul class="judges judges__columns list">
+	<ul class="judges judges__columns list">
 
 			<?php
 			/* Start the Loop */

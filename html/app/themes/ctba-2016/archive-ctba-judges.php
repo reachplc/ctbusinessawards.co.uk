@@ -22,7 +22,7 @@ get_header(); ?>
 				<p>The 2016 coventry Telegraph Business Awards judges are:</p>
 			</header><!-- .page-header -->
 
-  <ul class="judges judges__columns list">
+	<ul class="judges judges__columns list">
 
 			<?php
 			/* Start the Loop */
@@ -49,7 +49,7 @@ get_header(); ?>
 		<?php endwhile; ?>
 
 			</ul>
- <?php else :
+	<?php else :
 
 			get_template_part( 'content-parts/content', 'none' );
 
@@ -58,7 +58,7 @@ get_header(); ?>
 		    </article>
 
 		    <aside class="content__aside ss1-ss4 ms1-ms6 ls9-ls12">
-		      <?php get_sidebar(); ?>
+				<?php get_sidebar(); ?>
 		    <aside>
 
 		  </div>

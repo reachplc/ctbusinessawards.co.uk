@@ -18,16 +18,16 @@
 
 	<div class="entry-content">
 
-      <?php if ( has_post_thumbnail() ) : ?>
-      <?php the_post_thumbnail(
-    	array(280),
-    	array(
-    		'class' => 'image__responsive alignright sizemedium'
-    	)
-    ); ?>
-      <?php endif; ?>
+		<?php if ( has_post_thumbnail() ) : ?>
+		<?php the_post_thumbnail(
+			array(280),
+			array(
+			'class' => 'image__responsive alignright sizemedium'
+			)
+		); ?>
+		<?php endif; ?>
 
-      <?php
+		<?php
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */
 				wp_kses( __( 'Continue reading %s <span class="meta-nav">&rarr;</span>', 'ctba-2016' ), array( 'span' => array( 'class' => array() ) ) ),
@@ -35,7 +35,7 @@
 			) );
 			?>
 
-      <?php if( get_field('ctba-partners-url')):?><p><a href="<?php echo get_field('ctba-partners-url'); ?>" target="_blank" class="outbound link"  rel="nofollow"><?php the_title(); ?></a></p><?php endif; ?>
+		<?php if ( get_field( 'ctba-partners-url' ) ):?><p><a href="<?php echo get_field( 'ctba-partners-url' ); ?>" target="_blank" class="outbound link"  rel="nofollow"><?php the_title(); ?></a></p><?php endif; ?>
 
 		<?php
 			wp_link_pages( array(

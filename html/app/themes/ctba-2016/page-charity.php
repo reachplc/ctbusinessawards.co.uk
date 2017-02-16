@@ -1,11 +1,8 @@
 <?php
 /**
- * The template for displaying all pages.
+ * Charity package
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
+ * Loops through the partners post type for all charity sponsor level pages
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *

@@ -85,9 +85,9 @@ get_header(); ?>
 
 			<?php else : ?>
 				<?php /* Add new entry link */ ?>
-				<?php if( $nomination_status ):?>
+				<?php if ( $nomination_status ):?>
 					<p><?php printf( '<a href="%2$s" class="btn">%1$s</a>', esc_html__( 'New entry form', 'ctba-2016' ), esc_url( site_url( '/nominate/entry/' ) ) ); ?></p>
-				<?php else: ?>
+				<?php else : ?>
 					<section class="alert alert--message alert--warning alert--type box" role="alert">
 						<p>
 						<?php printf(
